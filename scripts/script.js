@@ -17,9 +17,13 @@
 
 const flixmix = {}
 
+// assign url and apiKEY to variables
 flixmix.url = 'https://api.themoviedb.org/3';
 flixmix.apiKey = '43cf4349cdbabac82573b86e2df23c8e';
+flixmix.selectedGenre1 = '';
+flixmix.selectedGenre2 = '';
 
+// create AJAX call to return the movies that match the genres selected
 flixmix.getMoviesAPICall = (genre1, genre2) => {
     return $.ajax ({
         url: `${flixmix.url}/discover/movie`,
@@ -35,17 +39,26 @@ flixmix.getMoviesAPICall = (genre1, genre2) => {
     })
 }
 
-
-
+// ****** if needed
 flixmix.returnedMovies = [];
 
-flixmix.getMovies = function (selectedGenre1, selectedGenre2) {
-    let moviesArray = flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2);
-
-    console.log(moviesArray);
-
+// Store the results from the API call into an array
+flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
+    $.when(flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2))
+        .then(function (res) {
+            return res.results;
+        })
 }
 
+flixmix.matchingGenres = (results) => {
+    results.filter((match) => {
+        if (match.genre_ids.includes(selectedGenre1) && match.genre_ids.includes(selectedGenre2)) {
+            console.log(match);
+        }
+    })
+}
+
+// Event listener for the submit button when genres are selected
 flixmix.eventListner = () => {
     $('form').on('submit', (e) => {
         e.preventDefault();
@@ -53,21 +66,16 @@ flixmix.eventListner = () => {
         let selectedGenre2 = $('.genre2').find(':selected').val();
         console.log(selectedGenre1);
         console.log(selectedGenre2);
-        // flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2);
         flixmix.getMovies(selectedGenre1, selectedGenre2);
     })
 }
 
-flixmix.init = () => {
-    
+// Initialize function
+flixmix.init = () => {   
     flixmix.eventListner()
-
-
-
 }
 
-
-
+// Document ready
 $(function() {
     flixmix.init()
 });
