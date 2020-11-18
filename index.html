@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlixMix</title>
+</head>
+<body>
+    <header>
+        <h1>FlixMix</h1>
+        <h2>Please choose 1 or 2 types of movie genres to curate a random movie recommendation that combines the 2 genres</h2>
+    </header>
+    <main>
+        <section>
+            <form>
+                <label for="genre1">Choose a genre:</label>
+                <select name="genre1" id="genre1" class="genre1">
+                    <option value="28">Action</option>
+                    <option value="12">Adventure</option>     
+                    <option value="16">Animation</option>
+                    <option value="35">Comedy</option>
+                    <option value="99">Documentary</option>
+                    <option value="18">Drama</option>
+                    <option value="10751">Family</option>
+                    <option value="14">Fantasy</option>
+                    <option value="36">History</option>
+                    <option value="27">Horror</option>
+                    <option value="10402">Music</option>
+                    <option value="9648">Mystery</option>
+                    <option value="10749">Romance</option>
+                    <option value="878">Science Fiction</option>
+                    <option value="10770">TV Movie</option>
+                    <option value="53">Thriller</option>
+                    <option value="10752">War</option>
+                    <option value="37">Western</option>
+                </select>
+                <label for="genre2">Choose a genre:</label>
+                    <select name="genre2" id="genre2" class="genre2">
+                        <option value="28">Action</option>
+                        <option value="12">Adventure</option>
+                        <option value="16">Animation</option>
+                        <option value="35">Comedy</option>
+                        <option value="99">Documentary</option>
+                        <option value="18">Drama</option>
+                        <option value="10751">Family</option>
+                        <option value="14">Fantasy</option>
+                        <option value="36">History</option>
+                        <option value="27">Horror</option>
+                        <option value="10402">Music</option>
+                        <option value="9648">Mystery</option>
+                        <option value="10749">Romance</option>
+                        <option value="878">Science Fiction</option>
+                        <option value="10770">TV Movie</option>
+                        <option value="53">Thriller</option>
+                        <option value="10752">War</option>
+                        <option value="37">Western</option>
+                    </select>
+                <button class="genreSubmit">Submit</button>
+            </form>
+        </section>
+
+        <section>
+            <div>
+                <figure class="moviePoster">
+
+                </figure>
+                <div>
+                    <h3 class="movieTitle">Movie Title <span class="year">Year</span></h3>
+                    <p class="releaseDate">Release Date</p>
+                    <p class="genre">Genre</p>
+                    <p class="runningTime">Running Time</p>
+                    <div>
+                        <p class="userScore">User Score</p>
+                        <p class="playTrailer">Play Trailer</p>
+                    </div>
+                    <h4 class="overview">Overview</h4>
+                    <p class="synoposis">Synopsis</p>
+                    <p class="director"></p>
+                    <p>Director</p>
+                </div>
+            </div>
+            <div>
+                <button class="nextMovie">Next Movie</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Created by Swetha & Jonathan at <a href="https://junocollege.com">Juno College</a></p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+    <script src="./scripts/script.js"></script>
+</body>
+</html>
+

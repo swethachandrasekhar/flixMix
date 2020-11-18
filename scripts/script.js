@@ -1,26 +1,3 @@
-//APP NAME TBD (Jon says NetMix)
-
-
-//API used - movieDB API 
-
-//An app that returns a Movie for you to watch based on 1/2 genre selection. 
-
-//Two dropdown/selection where user can select a genre
-//And clicks submit
-//App returns a list of movies and we randomly display one choice at a time
-//User can click "Find Another"
-
-//STRETCH GOALS
-
-// 1. Option to select different languages
-// 2. Display a carousel of movies
-// 3. Make the  movie poster as the background for result
-// 4. Choose another genre(add genre)
-// 5. Play trailer in an overlay/pop up from youtube
-// 6. Provide options to input filter options i.e highest rated
-
-
-
 //Javascript
 
 //Storage 
@@ -38,6 +15,62 @@
 //On click "play Trailer" make an API Call to /movie/videos end point and get the youtube ID
 //And create a youtube search query and create a pop up to play trailer
 
+const flixmix = {}
+
+flixmix.url = 'https://api.themoviedb.org/3';
+flixmix.apiKey = '43cf4349cdbabac82573b86e2df23c8e';
+
+flixmix.getMoviesAPICall = (genre1, genre2) => {
+    return $.ajax ({
+        url: `${flixmix.url}/discover/movie`,
+        dataType: 'json',
+        method: 'GET',
+        data: {
+            api_key: flixmix.apiKey,
+            with_genre: genre1,
+            with_genre: genre2,
+            language: 'en-US',
+            page: 1
+        }
+    })
+}
+
+
+
+flixmix.returnedMovies = [];
+
+flixmix.getMovies = function (selectedGenre1, selectedGenre2) {
+    let moviesArray = flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2);
+
+    console.log(moviesArray);
+
+}
+
+flixmix.eventListner = () => {
+    $('form').on('submit', (e) => {
+        e.preventDefault();
+        let selectedGenre1 = $('.genre1').find(':selected').val();
+        let selectedGenre2 = $('.genre2').find(':selected').val();
+        console.log(selectedGenre1);
+        console.log(selectedGenre2);
+        // flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2);
+        flixmix.getMovies(selectedGenre1, selectedGenre2);
+    })
+}
+
+flixmix.init = () => {
+    
+    flixmix.eventListner()
+
+
+
+}
+
+
+
+$(function() {
+    flixmix.init()
+});
 
 
 //TO DO 
