@@ -22,6 +22,7 @@ flixmix.url = 'https://api.themoviedb.org/3';
 flixmix.apiKey = '43cf4349cdbabac82573b86e2df23c8e';
 flixmix.selectedGenre1 = '';
 flixmix.selectedGenre2 = '';
+flixmix.returnedMovies = [];
 
 // create AJAX call to return the movies that match the genres selected
 flixmix.getMoviesAPICall = (genre1, genre2) => {
@@ -31,44 +32,77 @@ flixmix.getMoviesAPICall = (genre1, genre2) => {
         method: 'GET',
         data: {
             api_key: flixmix.apiKey,
-            with_genre: genre1,
-            with_genre: genre2,
+            with_genres: `${genre1},${genre2}`,
             language: 'en-US',
             page: 1
+            // check for more options
         }
     })
 }
 
-// ****** if needed
-flixmix.returnedMovies = [];
 
-// Store the results from the API call into an array
+
+
+// store the results from the API call into an array
 flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
     $.when(flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2))
         .then(function (res) {
-            return res.results;
+            flixmix.matchingGenres(res.results);
+            flixmix.returnedMovies = res.results;
+            console.log(flixmix.returnedMovies);
         })
 }
 
-flixmix.matchingGenres = (results) => {
-    results.filter((match) => {
-        if (match.genre_ids.includes(selectedGenre1) && match.genre_ids.includes(selectedGenre2)) {
-            console.log(match);
-        }
+flixmix.filteredMovies = () => {
+    flixmix.returnedMovies.forEach((movie) => {
+        console.log(movie);
+        // if (movie.genre_ids.includes(12)) {
+        //     console.log('yes');
+        // }
     })
+} 
+
+flixmix.filteredMovies();
+
+// console.log(flixmix.getMovies);
+
+
+flixmix.matchingGenres = (allResults) => {
+    console.log(allResults);
+    // const filteredMovies = flixmix.returnedMovies.filter((movie) => {
+    //     // console.log(movie.genre_ids);
+        
+    //         if (match.genre_ids.includes(28) && match.genre_ids.includes(12)) {
+    //             console.log(filteredMovies);
+    //         }
+    //         if (match.genre_ids.includes(flixmix.selectedGenre1) && match.genre_ids.includes(flixmix.selectedGenre2)) {
+    //             console.log(filteredMovies);
+    //         }
+        
+        
+    // })
+
+    // flixmix.returnedMovies.filter((match) => {
+    //      {
+    //         console.log(match);
+    //     }
+    // })
 }
+
 
 // Event listener for the submit button when genres are selected
 flixmix.eventListner = () => {
     $('form').on('submit', (e) => {
         e.preventDefault();
-        let selectedGenre1 = $('.genre1').find(':selected').val();
-        let selectedGenre2 = $('.genre2').find(':selected').val();
-        console.log(selectedGenre1);
-        console.log(selectedGenre2);
-        flixmix.getMovies(selectedGenre1, selectedGenre2);
+        flixmix.selectedGenre1 = $('.genre1').find(':selected').val();
+        flixmix.selectedGenre2 = $('.genre2').find(':selected').val();
+        console.log(flixmix.selectedGenre1);
+        console.log(flixmix.selectedGenre2);
+        flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
     })
 }
+
+
 
 // Initialize function
 flixmix.init = () => {   
