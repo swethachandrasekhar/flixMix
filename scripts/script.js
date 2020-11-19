@@ -47,47 +47,77 @@ flixmix.getMoviesAPICall = (genre1, genre2) => {
 flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
     $.when(flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2))
         .then(function (res) {
-            flixmix.matchingGenres(res.results);
-            flixmix.returnedMovies = res.results;
-            console.log(flixmix.returnedMovies);
+             console.log(res.results);
+            flixmix.filteredMovies(res.results);           
         })
 }
 
-flixmix.filteredMovies = () => {
-    flixmix.returnedMovies.forEach((movie) => {
-        console.log(movie);
-        // if (movie.genre_ids.includes(12)) {
-        //     console.log('yes');
-        // }
+
+ flixmix.getCreditsAPICall = (movieID) => {
+    //make a call to /movie/{movie_id}/credits 
+    return $.ajax ({
+        url: `${flixmix.url}/movie/${movieID}/credits`,
+        dataType: 'json',
+        method: 'GET',
+        data: {
+            api_key: flixmix.apiKey,
+            language: 'en-US',
+            page: 1
+        }
     })
-} 
-
-flixmix.filteredMovies();
-
-// console.log(flixmix.getMovies);
-
-
-flixmix.matchingGenres = (allResults) => {
-    console.log(allResults);
-    // const filteredMovies = flixmix.returnedMovies.filter((movie) => {
-    //     // console.log(movie.genre_ids);
-        
-    //         if (match.genre_ids.includes(28) && match.genre_ids.includes(12)) {
-    //             console.log(filteredMovies);
-    //         }
-    //         if (match.genre_ids.includes(flixmix.selectedGenre1) && match.genre_ids.includes(flixmix.selectedGenre2)) {
-    //             console.log(filteredMovies);
-    //         }
-        
-        
-    // })
-
-    // flixmix.returnedMovies.filter((match) => {
-    //      {
-    //         console.log(match);
-    //     }
-    // })
 }
+
+
+flixmix.directors = [];
+flixmix.finalDirectorList = [];
+flixmix.storeDirectors = (crewArray, mID) => {
+
+    let directorObject = crewArray.filter( function(value){
+              return value.job === 'Director'
+              
+        }) 
+      
+      
+      let test1 =  directorObject.map((value)=>{
+            return value.name
+       })
+    //    console.log(`Value of test1 is ${test1}`);
+
+       flixmix.finalDirectorList.push({ movieID: mID, directors: test1 });
+
+      
+   
+    //    console.log(`director names array ${flixmix.directors}`);
+
+
+};
+
+
+flixmix.filteredMovies = (array) => {
+    console.log(array, `inside filtered`);
+//get director for each movie 
+let directors = [];
+    array.forEach(movies => {
+      directors.push(flixmix.getCreditsAPICall(movies.id));
+    });
+     $.when(...directors)
+      .then(function (...gotDirectors) {
+           gotDirectors.forEach((item)=>{
+            console.log(`for Movie ID`, item[0].id);
+            let crew = item[0].crew;
+            let movieID = item[0].id;
+            flixmix.storeDirectors(crew, movieID);
+             
+            
+        })
+        flixmix.finalDirectorList.forEach((element) => {
+          //    console.log(`directors array $element);
+          console.log(`directors array with Movie ID ${element.movieID} and director names ${element.directors}` );
+        });
+    
+    })
+    
+} 
 
 
 // Event listener for the submit button when genres are selected
