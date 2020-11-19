@@ -105,6 +105,7 @@ flixmix.youtubeKey = [];
 
 // create AJAX call to return the movies that match the genres selected
 flixmix.getMoviesAPICall = (genre1, genre2) => {
+    return $.ajax({
         url: `${flixmix.url}/discover/movie`,
         dataType: "json",
         method: "GET",
@@ -112,13 +113,12 @@ flixmix.getMoviesAPICall = (genre1, genre2) => {
             api_key: flixmix.apiKey,
             with_genres: `${genre1},${genre2}`,
             language: "en-US",
-            page: 1,
+            page: 1
             // check for more options
-        },
-    });
-};
-    });
-};
+        }
+    })
+}
+        
 
 
 // AJAX call to return the trailer for the ultimate choice movie
@@ -137,8 +137,9 @@ flixmix.getTrailerAPICall = (ID) => {
     })
 }
 
-=======
+
   //make a call to /movie/{movie_id}/credits
+flixmix.getCreditsAPICall = (movieID) => {
   return $.ajax({
     url: `${flixmix.url}/movie/${movieID}/credits`,
     dataType: "json",
@@ -150,7 +151,7 @@ flixmix.getTrailerAPICall = (ID) => {
     },
   });
 };
->>>>>>> master
+
 
 
 
@@ -194,14 +195,14 @@ flixmix.filteredMovies = (array) => {
         .then(function (...gotTrailers) {
             console.log(`gotTrailer`, gotTrailers);
             gotTrailers.forEach((trailer) => {
-                flixmix.movieTrailer(trailer[0])
+                flixmix.movieTrailer(trailer[0], movieID)
             })
         })
 
 };
 
 // Function to get find the trailer for ultimate movie from all movie videos returned
-flixmix.movieTrailer = (trailerRes) => {
+flixmix.movieTrailer = (trailerRes, movieID) => {
     const trailerIndex = trailerRes.results;
     console.log(trailerIndex);
     // trailerIndex.forEach((video) => {
@@ -213,7 +214,7 @@ flixmix.movieTrailer = (trailerRes) => {
 
     trailerIndex.find((video) => {
         if (video.name.includes('Official Trailer')) {
-            flixmix.youtubeKey.push({videoID: video.key, movideID:});
+            flixmix.youtubeKey.push({videoID: video.key});
             console.log(`official`, flixmix.youtubeKey);
             return flixmix.youtubeKey;
         } else if (video.type.includes('Trailer')) {
@@ -336,7 +337,7 @@ const htmlString = `
                 <p class="director"></p>
                 <p>Director</p>
             </div> `;
-};
+
 
 // Get a random movie from the list of movies in the finalDirectors Array
 
