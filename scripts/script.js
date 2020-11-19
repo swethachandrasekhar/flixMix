@@ -23,6 +23,8 @@ flixmix.apiKey = '43cf4349cdbabac82573b86e2df23c8e';
 flixmix.selectedGenre1 = '';
 flixmix.selectedGenre2 = '';
 flixmix.returnedMovies = [];
+flixmix.directors = [];
+flixmix.finalDirectorList = [];
 
 // create AJAX call to return the movies that match the genres selected
 flixmix.getMoviesAPICall = (genre1, genre2) => {
@@ -40,20 +42,17 @@ flixmix.getMoviesAPICall = (genre1, genre2) => {
     })
 }
 
-
-
-
 // store the results from the API call into an array
 flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
     $.when(flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2))
         .then(function (res) {
-             console.log(res.results);
+            console.log(res.results);
             flixmix.filteredMovies(res.results);           
         })
 }
 
-
- flixmix.getCreditsAPICall = (movieID) => {
+// AJAX call to return the movie crew of returned movies
+flixmix.getCreditsAPICall = (movieID) => {
     //make a call to /movie/{movie_id}/credits 
     return $.ajax ({
         url: `${flixmix.url}/movie/${movieID}/credits`,
@@ -68,57 +67,34 @@ flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
 }
 
 
-flixmix.directors = [];
-flixmix.finalDirectorList = [];
+// Function to filter out the director(s) from the total list of crew and store their names along with movieID in an array
 flixmix.storeDirectors = (crewArray, mID) => {
-
-    let directorObject = crewArray.filter( function(value){
-              return value.job === 'Director'
-              
+    const directorObject = crewArray.filter( function(value){
+            return value.job === 'Director'
         }) 
-      
-      
-      let test1 =  directorObject.map((value)=>{
+    const directors =  directorObject.map((value)=>{
             return value.name
-       })
-    //    console.log(`Value of test1 is ${test1}`);
-
-       flixmix.finalDirectorList.push({ movieID: mID, directors: test1 });
-
-      
-   
-    //    console.log(`director names array ${flixmix.directors}`);
-
-
+    })
+    flixmix.finalDirectorList.push({ movieID: mID, directors: directors });
 };
 
-
+// Function to exectute the getCredits AJAX call to get the cast and crew and store in an array for each of the returned movies' AJAX call to be able to eventually retrieve the director(s) for each movie
 flixmix.filteredMovies = (array) => {
-    console.log(array, `inside filtered`);
 //get director for each movie 
 let directors = [];
     array.forEach(movies => {
-      directors.push(flixmix.getCreditsAPICall(movies.id));
+    directors.push(flixmix.getCreditsAPICall(movies.id));
     });
-     $.when(...directors)
-      .then(function (...gotDirectors) {
-           gotDirectors.forEach((item)=>{
-            console.log(`for Movie ID`, item[0].id);
-            let crew = item[0].crew;
-            let movieID = item[0].id;
-            flixmix.storeDirectors(crew, movieID);
-             
-            
+    $.when(...directors)
+        .then(function (...gotDirectors) {
+            gotDirectors.forEach((item)=>{
+            const crew = item[0].crew;
+            const movieID = item[0].id;
+            // Function call to create an array of crew and movie
+            flixmix.storeDirectors(crew, movieID);  
         })
-        flixmix.finalDirectorList.forEach((element) => {
-          //    console.log(`directors array $element);
-          console.log(`directors array with Movie ID ${element.movieID} and director names ${element.directors}` );
-        });
-    
     })
-    
 } 
-
 
 // Event listener for the submit button when genres are selected
 flixmix.eventListner = () => {
