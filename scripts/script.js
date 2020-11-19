@@ -132,14 +132,13 @@ flixmix.getTrailerAPICall = (ID) => {
             api_key: flixmix.apiKey,
             language: "en-US",
             page: 1,
-            // movie_id: ID
         }
     })
 }
 
-
-  //make a call to /movie/{movie_id}/credits
+// AJAX call to return the movie crew of returned movies
 flixmix.getCreditsAPICall = (movieID) => {
+  //make a call to /movie/{movie_id}/credits
   return $.ajax({
     url: `${flixmix.url}/movie/${movieID}/credits`,
     dataType: "json",
@@ -195,16 +194,18 @@ flixmix.filteredMovies = (array) => {
         .then(function (...gotTrailers) {
             console.log(`gotTrailer`, gotTrailers);
             gotTrailers.forEach((trailer) => {
-                flixmix.movieTrailer(trailer[0], movieID)
+                flixmix.movieTrailer(trailer[0])
             })
         })
 
 };
 
 // Function to get find the trailer for ultimate movie from all movie videos returned
-flixmix.movieTrailer = (trailerRes, movieID) => {
+flixmix.movieTrailer = (trailerRes) => {
     const trailerIndex = trailerRes.results;
+    const trailerMovieID = trailerRes.id;
     console.log(trailerIndex);
+    
     // trailerIndex.forEach((video) => {
     //     if (video.type === 'Trailer') {
     //         flixmix.youtubeKey = video.key;
@@ -214,11 +215,11 @@ flixmix.movieTrailer = (trailerRes, movieID) => {
 
     trailerIndex.find((video) => {
         if (video.name.includes('Official Trailer')) {
-            flixmix.youtubeKey.push({videoID: video.key});
+            flixmix.youtubeKey.push({videoID: video.key, MovieID: trailerMovieID});
             console.log(`official`, flixmix.youtubeKey);
             return flixmix.youtubeKey;
         } else if (video.type.includes('Trailer')) {
-            flixmix.youtubeKey = video.key;
+            flixmix.youtubeKey.push({ videoID: video.key, MovieID: trailerMovieID });
             console.log(`trailer`, flixmix.youtubeKey)
         }
     })
@@ -317,26 +318,6 @@ flixmix.eventListner = () => {
         flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
     });
 };
-
-// let youtubesearchURL = ;
-
-const htmlString = `
-            <figure class="moviePoster">
-                <img src="${ultimateMovie.backdrop_path}" alt="Movie ${ultimateMovie.title}"
-            </figure>
-            <div>
-                <h3 class="movieTitle"> ${ultimateMovie.title} <span class="year">${year}</span></h3>
-                <p class="releaseDate">${ultimateMovie.release_date}</p>
-                <p class="genre">${ultimateGID}</p>
-                <div>
-                    <p class="userScore">${ultimateMovie.vote_average}</p>
-                    <p class="playTrailer"></p>
-                </div>
-                <h4 class="overview">Overview</h4>
-                <p class="synoposis">${ultimateMovie.overview}</p>
-                <p class="director"></p>
-                <p>Director</p>
-            </div> `;
 
 
 // Get a random movie from the list of movies in the finalDirectors Array
