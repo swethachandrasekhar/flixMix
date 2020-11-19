@@ -194,7 +194,7 @@ flixmix.filteredMovies = (array) => {
         .then(function (...gotTrailers) {
             console.log(`gotTrailer`, gotTrailers);
             gotTrailers.forEach((trailer) => {
-                flixmix.movieTrailer(trailer[0])
+                flixmix.movieTrailer(trailer[0]);
             })
         })
 
@@ -204,8 +204,8 @@ flixmix.filteredMovies = (array) => {
 flixmix.movieTrailer = (trailerRes) => {
     const trailerIndex = trailerRes.results;
     const trailerMovieID = trailerRes.id;
-    console.log(trailerIndex);
-    
+    console.log(`trailerindex`, trailerIndex);
+
     // trailerIndex.forEach((video) => {
     //     if (video.type === 'Trailer') {
     //         flixmix.youtubeKey = video.key;
@@ -213,16 +213,25 @@ flixmix.movieTrailer = (trailerRes) => {
     //     }
     // })
 
-    trailerIndex.find((video) => {
-        if (video.name.includes('Official Trailer')) {
-            flixmix.youtubeKey.push({videoID: video.key, MovieID: trailerMovieID});
-            console.log(`official`, flixmix.youtubeKey);
-            return flixmix.youtubeKey;
-        } else if (video.type.includes('Trailer')) {
-            flixmix.youtubeKey.push({ videoID: video.key, MovieID: trailerMovieID });
-            console.log(`trailer`, flixmix.youtubeKey)
-        }
-    })
+    trailerIndex.forEach((video) => {
+        const finalTrailer = video.find((item) => {
+            return (item.name.includes('Official Trailer') || item.type.includes('Trailer')) 
+                // flixmix.youtubeKey.push({ videoID: video.key, MovieID: trailerMovieID });
+        })
+        console.log(finalTrailer);
+    })    
+    console.log(`finalkey`, flixmix.youtubeKey);
+
+    // trailerIndex.find((video) => {
+    //     if (video.name.includes('Official Trailer')) {
+    //         flixmix.youtubeKey.push({videoID: video.key, MovieID: trailerMovieID});
+    //         console.log(`official`, flixmix.youtubeKey);
+    //         return flixmix.youtubeKey;
+    //     } else if (video.type.includes('Trailer')) {
+    //         flixmix.youtubeKey.push({ videoID: video.key, MovieID: trailerMovieID });
+    //         console.log(`trailer`, flixmix.youtubeKey)
+    //     }
+    // })
 
 
     // for (let i = 0; i < trailerIndex.length; i++) {
