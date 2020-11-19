@@ -102,7 +102,7 @@ flixmix.selectedGenre2 = "";
 flixmix.returnedMovies = [];
 flixmix.directors = [];
 flixmix.finalDirectorList = [];
-flixmix.youtubeKey = '';
+flixmix.youtubeKey = [];
 
 
 // create AJAX call to return the movies that match the genres selected
@@ -151,10 +151,6 @@ flixmix.getTrailerAPICall = (ID) => {
             // movie_id: ID
         }
     })
-        .then((allvideos) => {
-            flixmix.movieTrailer(allvideos);
-            // console.log(allvideos);
-        })
 }
 
 
@@ -176,22 +172,34 @@ flixmix.storeDirectors = (crewArray, mID) => {
 flixmix.filteredMovies = (array) => {
     //get director for each movie
     let directors = [];
+    let trailers = [];
     array.forEach((movies) => {
         directors.push(flixmix.getCreditsAPICall(movies.id));
+        trailers.push(flixmix.getTrailerAPICall(movies.id));
     });
-    $.when(...directors).then(function (...gotDirectors) {
-        gotDirectors.forEach((item) => {
-            const crew = item[0].crew;
-            const movieID = item[0].id;
-            // Function call to create an array of crew and movie
-            flixmix.storeDirectors(crew, movieID);
+    $.when(...directors)
+        .then(function (...gotDirectors) {
+            gotDirectors.forEach((item) => {
+                const crew = item[0].crew;
+                const movieID = item[0].id;
+                // Function call to create an array of crew and movie
+                flixmix.storeDirectors(crew, movieID);
+            });
+            flixmix.finalDirectorList.forEach((element) => {
+                //    console.log(`im hererr`);
+                //    console.log(` ${element.movieID} and ${element.directors}`);
+            });
+            console.log(flixmix.finalDirectorList);
+            flixmix.getARandomMovie(flixmix.finalDirectorList); // <----- WAS RETURNING 0 OUTSIDE OF THIS FUNCTION
         });
-        flixmix.finalDirectorList.forEach((element) => {
-            //    console.log(`im hererr`);
-            //    console.log(` ${element.movieID} and ${element.directors}`);
-        });
-        flixmix.getARandomMovie(flixmix.finalDirectorList);
-    });
+    $.when(...trailers)
+        .then(function (...gotTrailers) {
+            console.log(`gotTrailer`, gotTrailers);
+            gotTrailers.forEach((trailer) => {
+                flixmix.movieTrailer(trailer[0])
+            })
+        })
+
 };
 
 // Function to get find the trailer for ultimate movie from all movie videos returned
@@ -207,8 +215,8 @@ flixmix.movieTrailer = (trailerRes) => {
 
     trailerIndex.find((video) => {
         if (video.name.includes('Official Trailer')) {
+            flixmix.youtubeKey.push({videoID: video.key, movideID:});
             console.log(`official`, flixmix.youtubeKey);
-            flixmix.youtubeKey = video.key;
             return flixmix.youtubeKey;
         } else if (video.type.includes('Trailer')) {
             flixmix.youtubeKey = video.key;
