@@ -16,81 +16,79 @@
 
 
 const genre = [
-    {
-        genreID: 28,
-        genreName: "Action",
-    },
-    {
-        genreID: 12,
-        genreName: "Adventures",
-    },
-    {
-        genreID: 16,
-        genreName: "Animations",
-    },
-    {
-        genreID: 35,
-        genreName: "Comedy",
-    },
-    {
-        genreID: 99,
-        genreName: "Documentary",
-    },
-    {
-        genreID: 18,
-        genreName: "Drama",
-    },
-    {
-        genreID: 10751,
-        genreName: "Family",
-    },
-    {
-        genreID: 14,
-        genreName: "Fantasy",
-    },
-    {
-        genreID: 36,
-        genreName: "History",
-    },
-    {
-        genreID: 27,
-        genreName: "Horror",
-    },
-    {
-        genreID: 10402,
-        genreName: "Music",
-    },
-    {
-        genreID: 9648,
-        genreName: "Mystery",
-    },
-    {
-        genreID: 10749,
-        genreName: "Romance",
-    },
-    {
-        genreID: 878,
-        genreName: "Sci-Fi",
-    },
-    {
-        genreID: 10770,
-        genreName: "TV-Movie",
-    },
-    {
-        genreID: 53,
-        genreName: "Thriller",
-    },
-    {
-        genreID: 10752,
-        genreName: "War",
-    },
-    {
-        genreID: 37,
-        genreName: "Western",
-    },
+  {
+    genreID: 28,
+    genreName: "Action",
+  },
+  {
+    genreID: 12,
+    genreName: "Adventures",
+  },
+  {
+    genreID: 16,
+    genreName: "Animations",
+  },
+  {
+    genreID: 35,
+    genreName: "Comedy",
+  },
+  {
+    genreID: 99,
+    genreName: "Documentary",
+  },
+  {
+    genreID: 18,
+    genreName: "Drama",
+  },
+  {
+    genreID: 10751,
+    genreName: "Family",
+  },
+  {
+    genreID: 14,
+    genreName: "Fantasy",
+  },
+  {
+    genreID: 36,
+    genreName: "History",
+  },
+  {
+    genreID: 27,
+    genreName: "Horror",
+  },
+  {
+    genreID: 10402,
+    genreName: "Music",
+  },
+  {
+    genreID: 9648,
+    genreName: "Mystery",
+  },
+  {
+    genreID: 10749,
+    genreName: "Romance",
+  },
+  {
+    genreID: 878,
+    genreName: "Sci-Fi",
+  },
+  {
+    genreID: 10770,
+    genreName: "TV-Movie",
+  },
+  {
+    genreID: 53,
+    genreName: "Thriller",
+  },
+  {
+    genreID: 10752,
+    genreName: "War",
+  },
+  {
+    genreID: 37,
+    genreName: "Western",
+  },
 ];
-
-let ultimateMovieID = '';
 
 const flixmix = {};
 
@@ -107,7 +105,6 @@ flixmix.youtubeKey = [];
 
 // create AJAX call to return the movies that match the genres selected
 flixmix.getMoviesAPICall = (genre1, genre2) => {
-    return $.ajax({
         url: `${flixmix.url}/discover/movie`,
         dataType: "json",
         method: "GET",
@@ -120,19 +117,6 @@ flixmix.getMoviesAPICall = (genre1, genre2) => {
         },
     });
 };
-
-// AJAX call to return the movie crew of returned movies
-flixmix.getCreditsAPICall = (movieID) => {
-    //make a call to /movie/{movie_id}/credits
-    return $.ajax({
-        url: `${flixmix.url}/movie/${movieID}/credits`,
-        dataType: "json",
-        method: "GET",
-        data: {
-            api_key: flixmix.apiKey,
-            language: "en-US",
-            page: 1,
-        },
     });
 };
 
@@ -153,6 +137,20 @@ flixmix.getTrailerAPICall = (ID) => {
     })
 }
 
+=======
+  //make a call to /movie/{movie_id}/credits
+  return $.ajax({
+    url: `${flixmix.url}/movie/${movieID}/credits`,
+    dataType: "json",
+    method: "GET",
+    data: {
+      api_key: flixmix.apiKey,
+      language: "en-US",
+      page: 1,
+    },
+  });
+};
+>>>>>>> master
 
 
 
@@ -317,6 +315,66 @@ flixmix.eventListner = () => {
         console.log(flixmix.selectedGenre2);
         flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
     });
+};
+
+// let youtubesearchURL = ;
+
+const htmlString = `
+            <figure class="moviePoster">
+                <img src="${ultimateMovie.backdrop_path}" alt="Movie ${ultimateMovie.title}"
+            </figure>
+            <div>
+                <h3 class="movieTitle"> ${ultimateMovie.title} <span class="year">${year}</span></h3>
+                <p class="releaseDate">${ultimateMovie.release_date}</p>
+                <p class="genre">${ultimateGID}</p>
+                <div>
+                    <p class="userScore">${ultimateMovie.vote_average}</p>
+                    <p class="playTrailer"></p>
+                </div>
+                <h4 class="overview">Overview</h4>
+                <p class="synoposis">${ultimateMovie.overview}</p>
+                <p class="director"></p>
+                <p>Director</p>
+            </div> `;
+};
+
+// Get a random movie from the list of movies in the finalDirectors Array
+
+flixmix.getARandomMovie = (directorsArray) => {
+  const index = Math.floor(Math.random() * directorsArray.length);
+  const ultimateMovieID = directorsArray[index].movieID;
+  console.log(`ultimate`, ultimateMovieID);
+  const ultimateMovieDeets = flixmix.returnedMovies.filter((movie) => {
+    console.log(movie.id);
+    return movie.id === ultimateMovieID;
+  });
+
+  console.log(` moviedeets`, ultimateMovieDeets);
+
+  flixmix.displayUltimateMovie(ultimateMovieDeets[0]);
+};
+
+// store the results from the API call into an array
+flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
+  $.when(flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2)).then(
+    function (res) {
+      console.log(res.results);
+      flixmix.returnedMovies = res.results;
+      flixmix.filteredMovies(flixmix.returnedMovies);
+    }
+  );
+};
+
+// Event listener for the submit button when genres are selected
+flixmix.eventListner = () => {
+  $("form").on("submit", (e) => {
+    e.preventDefault();
+    flixmix.selectedGenre1 = $(".genre1").find(":selected").val();
+    flixmix.selectedGenre2 = $(".genre2").find(":selected").val();
+    console.log(flixmix.selectedGenre1);
+    console.log(flixmix.selectedGenre2);
+    flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
+  });
 };
 
 // Initialize function
