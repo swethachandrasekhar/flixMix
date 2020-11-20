@@ -98,7 +98,6 @@ flixmix.apiKey = "43cf4349cdbabac82573b86e2df23c8e";
 flixmix.selectedGenre1 = "";
 flixmix.selectedGenre2 = "";
 flixmix.returnedMovies = [];
-flixmix.directors = [];
 flixmix.finalDirectorList = [];
 flixmix.youtubeKey = [];
 
@@ -183,22 +182,23 @@ flixmix.filteredMovies = (array) => {
                 // Function call to create an array of crew and movie
                 flixmix.storeDirectors(crew, movieID);
             });
-            // flixmix.finalDirectorList.forEach((element) => {
-            //     //    console.log(`im hererr`);
-            //     //    console.log(` ${element.movieID} and ${element.directors}`);
-            // });
-            console.log(flixmix.finalDirectorList);
-            flixmix.getARandomMovie(flixmix.finalDirectorList); // <----- WAS RETURNING 0 OUTSIDE OF THIS FUNCTION
-        });
-    $.when(...trailers)
-        .then(function (...gotTrailers) {
-            console.log(`gotTrailer`, gotTrailers);
-            gotTrailers.forEach((trailer) => {
-                flixmix.movieTrailer(trailer[0])
-            })
 
-            console.log(flixmix.youtubeKey);
-        })
+            $.when(...trailers).then(function (...gotTrailers) {
+              console.log(`gotTrailer`, gotTrailers);
+              gotTrailers.forEach((trailer) => {
+                flixmix.movieTrailer(trailer[0]);
+              });
+
+             
+
+              flixmix.getARandomMovie( flixmix.finalDirectorList,flixmix.youtubeKey);
+              //ASK ON HELPCUE 
+              // <----- WAS RETURNING 0 OUTSIDE OF THIS FUNCTION
+              // console.log(flixmix.youtubeKey);
+            });
+           
+        });
+    
 
 };
 
@@ -206,21 +206,21 @@ flixmix.filteredMovies = (array) => {
 flixmix.movieTrailer = (trailerRes) => {
     const trailerIndex = trailerRes.results;
     const trailerMovieID = trailerRes.id;
-    console.log(trailerIndex);
+    // console.log(trailerIndex);
     let trailerKey ='';
 
     if (trailerIndex.length !== 0){
       for (i = 0; i < trailerIndex.length; i++) {
         if (
-          trailerIndex[i].name.includes("Official") &&
-          trailerIndex[i].type === "Trailer"
+          trailerIndex[i].name.includes("Official") && trailerIndex[i].type === "Trailer"
         ) {
-          console.log("im inside first if condition");
+        //   console.log("im inside first if condition");
           trailerKey = trailerIndex[i].key;
           break;
         } else if (trailerIndex[i].type === "Trailer") {
-          console.log("im inside second if condition");
+        //   console.log("im inside second if condition");
           trailerKey = trailerIndex[i].key;
+         
         }
       }
 
@@ -236,27 +236,34 @@ flixmix.movieTrailer = (trailerRes) => {
 }
 
 // Function to display the ultimate movie on screen
-flixmix.displayUltimateMovie = (ultimateMovie) => {
-    let year = ultimateMovie.release_date;
-    year = year.substring(0, 4);
-    console.log(genre);
+flixmix.displayUltimateMovie = (ultimateMovie, trailerKey) => {
+  let year = ultimateMovie.release_date;
+  year = year.substring(0, 4);
+  // console.log(genre);
 
-    gIDs = ultimateMovie.genre_ids
-    let ultimateGID = '';
-    gIDs.forEach(gid => {
-        for (let i = 0; i < genre.length; i++) {
-            if (genre[i].genreID === gid) {
-                ultimateGID = ultimateGID + ` ${(genre[i].genreName)}`;
-            }
-        }
-    })
+  gIDs = ultimateMovie.genre_ids;
 
-    // Call AJAX call function to get ultimate movie videos array
-    flixmix.getTrailerAPICall(ultimateMovie.id);
+  let ultimateGID = "";
+  gIDs.forEach((gid) => {
+    for (let i = 0; i < genre.length; i++) {
+      if (genre[i].genreID === gid) {
+        ultimateGID = ultimateGID + ` ${genre[i].genreName}`;
+      }
+    }
+  });
 
-    // let youtubesearchURL = ;
+  // Call AJAX call function to get ultimate movie videos array
+  let className ='';
+  console.log(ultimateMovie.id, trailerKey, );
+  if (trailerKey === "NA") {
+    className = "noTrailer";
+  } else {
+    className = "showTrailer";
+  }
 
-    const htmlString = `
+  // let youtubesearchURL = ;
+
+  const htmlString = `
             <figure class="moviePoster">
                 <img src="${ultimateMovie.backdrop_path}" alt="Movie ${ultimateMovie.title}"
             </figure>
@@ -267,7 +274,7 @@ flixmix.displayUltimateMovie = (ultimateMovie) => {
                 <div>
                     <p class="userScore">${ultimateMovie.vote_average}</p>
                     <p class="playTrailer">
-                        <a href="https://www.youtube.com/watch?v=${flixmix.youtubeKey}">Play Trailer</a>
+                        <a href="https://www.youtube.com/watch?v=${trailerKey}" class="${className}">Play Trailer</a>
                     </p>
                 </div>
                 <h4 class="overview">Overview</h4>
@@ -294,6 +301,8 @@ flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
 flixmix.eventListner = () => {
     $("form").on("submit", (e) => {
         e.preventDefault();
+       flixmix.finalDirectorList = [];
+       flixmix.youtubeKey = [];
         flixmix.selectedGenre1 = $(".genre1").find(":selected").val();
         flixmix.selectedGenre2 = $(".genre2").find(":selected").val();
         console.log(flixmix.selectedGenre1);
@@ -305,8 +314,9 @@ flixmix.eventListner = () => {
 
 // Get a random movie from the list of movies in the finalDirectors Array
 
-flixmix.getARandomMovie = (directorsArray) => {
+flixmix.getARandomMovie = (directorsArray, youtubeKeyArray) => {
   const index = Math.floor(Math.random() * directorsArray.length);
+//   console.log(`directors array....`, directorsArray[1].directors);
   const ultimateMovieID = directorsArray[index].movieID;
   console.log(`ultimate`, ultimateMovieID);
   const ultimateMovieDeets = flixmix.returnedMovies.filter((movie) => {
@@ -316,7 +326,36 @@ flixmix.getARandomMovie = (directorsArray) => {
 
   console.log(` moviedeets`, ultimateMovieDeets);
 
-  flixmix.displayUltimateMovie(ultimateMovieDeets[0]);
+ let trailerKey = "";
+ console.log(`length of youtubekey array is`, flixmix.youtubeKey);
+
+ flixmix.youtubeKey.forEach((movie) => {
+   console.log(`movie ID is ${movie.movieID}`);
+   if (movie.movieID === ultimateMovieID) {
+     trailerKey = movie.TrailerKey;
+   }
+ });
+// let ultimateDirectorsArray =[];
+let ultimatedirector ='';
+ directorsArray.forEach((movie) => {
+        console.log(`movie id and ultimate movie`, movie.movieID, ultimateMovieID );
+     if(movie.movieID === ultimateMovieID ){
+         console.log(movie.directors);
+         movie.directors.forEach((director)=> {
+
+             console.log(director);
+             console.log(`before ${ultimatedirector}`);
+             const d = director;
+            ultimatedirector = ultimatedirector + d;
+            console.log(`after ${ultimatedirector}`);
+         });
+       
+     }
+
+ });
+// console.log(ultimatedirector);
+
+  flixmix.displayUltimateMovie(ultimateMovieDeets[0], trailerKey);
 };
 
 // store the results from the API call into an array
