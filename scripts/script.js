@@ -333,6 +333,17 @@ flixmix.eventListner = () => {
 
         flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
     });
+
+  $(".nextMovie").on("click", (e) => {
+    e.preventDefault();
+    flixmix.selectedGenre1 = $(".genre1").find(":selected").val();
+    flixmix.selectedGenre2 = $(".genre2").find(":selected").val();
+    console.log(flixmix.selectedGenre1);
+    console.log(flixmix.selectedGenre2);
+    flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
+  });
+
+
 };
 
 
