@@ -280,6 +280,7 @@ flixmix.displayUltimateMovie = (ultimateMovie, trailerKey, director) => {
   // let youtubesearchURL = ;
 
   const htmlString = `
+          <div>
             <figure class="moviePoster">
                 <img src="https://image.tmdb.org/t/p/w500/${ultimateMovie.backdrop_path}" alt="Movie ${ultimateMovie.title}"
             </figure>
@@ -297,10 +298,36 @@ flixmix.displayUltimateMovie = (ultimateMovie, trailerKey, director) => {
                 <p class="synoposis">${ultimateMovie.overview}</p>
                 <p class="director">${director}</p>
                 <p>Director</p>
-            </div> `;
+            </div> 
+          </div>
+
+
+          <div>
+            <figure class="moviePoster">
+                <img src="https://image.tmdb.org/t/p/w500/${ultimateMovie.backdrop_path}" alt="Movie ${ultimateMovie.title}"
+            </figure>
+            <div>
+                <h3 class="movieTitle"> ${ultimateMovie.title} <span class="year">${year}</span></h3>
+                <p class="releaseDate">${ultimateMovie.release_date}</p>
+                <p class="genre">${ultimateGID}</p>
+                <div>
+                    <p class="userScore">${ultimateMovie.vote_average}</p>
+                    <p class="playTrailer">
+                        <a href="https://www.youtube.com/watch?v=${trailerKey}" class="${className}">Play Trailer</a>
+                    </p>
+                </div>
+                <h4 class="overview">Overview</h4>
+                <p class="synoposis">${ultimateMovie.overview}</p>
+                <p class="director">${director}</p>
+                <p>Director</p>
+            </div> 
+          </div>`;
 
     console.log(htmlString);    
-    $(".ultimateMovie").html(htmlString);
+    $(".carousel").append(htmlString);
+  $('.carousel').slick({
+
+  });
     
 };
 
@@ -333,18 +360,15 @@ flixmix.eventListner = () => {
 
         flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
     });
-
-  $(".nextMovie").on("click", (e) => {
-    e.preventDefault();
-    flixmix.selectedGenre1 = $(".genre1").find(":selected").val();
-    flixmix.selectedGenre2 = $(".genre2").find(":selected").val();
-    console.log(flixmix.selectedGenre1);
-    console.log(flixmix.selectedGenre2);
-    flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
-  });
+    
+    // $(".nextMovie").on("click", (e) => {
+    //   e.preventDefault();
+      
+    //   flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
+    // });
+  };
 
 
-};
 
 
 // Get a random movie from the list of movies in the finalDirectors Array
@@ -401,12 +425,13 @@ let ultimatedirector ='';
 
 // Initialize function
 flixmix.init = () => {
-    flixmix.eventListner();
+  flixmix.eventListner();
 };
 
 // Document ready
 $(function () {
-    flixmix.init();
+  flixmix.init();
+  
 });
 
 //TO DO
