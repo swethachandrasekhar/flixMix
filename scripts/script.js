@@ -183,10 +183,10 @@ flixmix.filteredMovies = (array) => {
                 // Function call to create an array of crew and movie
                 flixmix.storeDirectors(crew, movieID);
             });
-            flixmix.finalDirectorList.forEach((element) => {
-                //    console.log(`im hererr`);
-                //    console.log(` ${element.movieID} and ${element.directors}`);
-            });
+            // flixmix.finalDirectorList.forEach((element) => {
+            //     //    console.log(`im hererr`);
+            //     //    console.log(` ${element.movieID} and ${element.directors}`);
+            // });
             console.log(flixmix.finalDirectorList);
             flixmix.getARandomMovie(flixmix.finalDirectorList); // <----- WAS RETURNING 0 OUTSIDE OF THIS FUNCTION
         });
@@ -196,6 +196,8 @@ flixmix.filteredMovies = (array) => {
             gotTrailers.forEach((trailer) => {
                 flixmix.movieTrailer(trailer[0])
             })
+
+            console.log(flixmix.youtubeKey);
         })
 
 };
@@ -205,32 +207,32 @@ flixmix.movieTrailer = (trailerRes) => {
     const trailerIndex = trailerRes.results;
     const trailerMovieID = trailerRes.id;
     console.log(trailerIndex);
-    
-    // trailerIndex.forEach((video) => {
-    //     if (video.type === 'Trailer') {
-    //         flixmix.youtubeKey = video.key;
-    //         console.log(flixmix.youtubeKey);
-    //     }
-    // })
+    let trailerKey ='';
 
-    trailerIndex.find((video) => {
-        if (video.name.includes('Official Trailer')) {
-            flixmix.youtubeKey.push({videoID: video.key, MovieID: trailerMovieID});
-            console.log(`official`, flixmix.youtubeKey);
-            return flixmix.youtubeKey;
-        } else if (video.type.includes('Trailer')) {
-            flixmix.youtubeKey.push({ videoID: video.key, MovieID: trailerMovieID });
-            console.log(`trailer`, flixmix.youtubeKey)
+    if (trailerIndex.length !== 0){
+      for (i = 0; i < trailerIndex.length; i++) {
+        if (
+          trailerIndex[i].name.includes("Official") &&
+          trailerIndex[i].type === "Trailer"
+        ) {
+          console.log("im inside first if condition");
+          trailerKey = trailerIndex[i].key;
+          break;
+        } else if (trailerIndex[i].type === "Trailer") {
+          console.log("im inside second if condition");
+          trailerKey = trailerIndex[i].key;
         }
-    })
+      }
 
+       console.log(trailerKey);
+     
+    } else {
+         trailerKey = 'NA'
+        
+    }
+     flixmix.youtubeKey.push({'movieID':trailerMovieID, 'TrailerKey': trailerKey });
 
-    // for (let i = 0; i < trailerIndex.length; i++) {
-    //     if (trailerIndex[i].type === 'Trailer') {
-    //         flixmix.youtubeKey = trailerIndex[i].key;
-    //         console.log(flixmix.youtubeKey);
-    //     }
-    // }
+ 
 }
 
 // Function to display the ultimate movie on screen
@@ -251,10 +253,6 @@ flixmix.displayUltimateMovie = (ultimateMovie) => {
 
     // Call AJAX call function to get ultimate movie videos array
     flixmix.getTrailerAPICall(ultimateMovie.id);
-
-
-
-
 
     // let youtubesearchURL = ;
 
@@ -279,22 +277,7 @@ flixmix.displayUltimateMovie = (ultimateMovie) => {
             </div> `;
 };
 
-// Get a random movie from the list of movies in the finalDirectors Array
 
-flixmix.getARandomMovie = (directorsArray) => {
-    const index = Math.floor(Math.random() * directorsArray.length);
-    ultimateMovieID = directorsArray[index].movieID;
-    console.log(`ultimate`, ultimateMovieID);
-    const ultimateMovieDeets = flixmix.returnedMovies.filter((movie) => {
-        console.log(movie.id);
-        return movie.id === ultimateMovieID;
-    });
-
-    console.log(` moviedeets`, ultimateMovieDeets);
-
-
-    flixmix.displayUltimateMovie(ultimateMovieDeets[0]);
-};
 
 // store the results from the API call into an array
 flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
