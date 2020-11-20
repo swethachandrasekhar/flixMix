@@ -165,7 +165,7 @@ flixmix.storeDirectors = (crewArray, mID) => {
     flixmix.finalDirectorList.push({ movieID: mID, directors: directors });
 };
 
-// Function to exectute the getCredits AJAX call to get the cast and crew and store in an array for each of the returned movies' AJAX call to be able to eventually retrieve the director(s) for each movie
+// Function to exectute the getCredits AJAX call to get the cast and crew and store in an array for each of the returned movies' AJAX call to be able to eventually retrieve the matching director(s) for each movie
 flixmix.filteredMoviesDirectors = (array) => {
   //get director for each movie
   let directors = [];
@@ -213,7 +213,7 @@ flixmix.filteredMoviesTrailer = (array) => {
     console.log(
       `director length and youtube key length ${flixmix.finalDirectorList.length} ${flixmix.youtubeKey.length}`
     );
-    flixmix.getARandomMovie(flixmix.finalDirectorList, flixmix.youtubeKey);
+   flixmix.displayUltimateMovie(array, flixmix.finalDirectorList, flixmix.youtubeKey);
  });
 
 }
@@ -252,79 +252,94 @@ flixmix.movieTrailer = (trailerRes) => {
 }
 
 // Function to display the ultimate movie on screen
-flixmix.displayUltimateMovie = (ultimateMovie, trailerKey, director) => {
-  let year = ultimateMovie.release_date;
-  year = year.substring(0, 4);
-  // console.log(genre);
+flixmix.displayUltimateMovie = (ultimateMovieArray, directorsArray, youtubeKeyArray) => {
+  console.log(ultimateMovieArray.length);
+  for (let i=0; i < ultimateMovieArray.length; i++) {
+    let trailerKey = "";
+    //  console.log(`length of youtubekey array is`, flixmix.youtubeKey);
 
-  gIDs = ultimateMovie.genre_ids;
-
-  let ultimateGID = "";
-  gIDs.forEach((gid) => {
-    for (let i = 0; i < genre.length; i++) {
-      if (genre[i].genreID === gid) {
-        ultimateGID = ultimateGID + ` ${genre[i].genreName}`;
+    // console.log(`youtubekey array length ${youtubeKeyArray.length}`);
+    youtubeKeyArray.forEach((movie) => {
+      // console.log(`movie ID is ${movie.movieID}`);
+      if (movie.movieID === ultimateMovieArray[i].id) {
+        trailerKey = movie.TrailerKey;
       }
+    });
+
+    
+
+    // let ultimateDirectorsArray =[];
+    let ultimateDirector = '';
+    directorsArray.forEach((movie) => {
+      // console.log(`movie id and ultimate movie`, movie.movieID, ultimateMovieID);
+      if (movie.movieID === ultimateMovieArray[i].id) {
+        // console.log(movie.directors);
+        movie.directors.forEach((director) => {
+
+          // console.log(director);
+          // console.log(`before ${ultimatedirector}`);
+          //  const d = director;
+          ultimateDirector = ultimateDirector + "   " + director;
+          // console.log(`after ${ultimatedirector}`);
+        });
+
+      }
+
+    });
+
+
+
+    let year = ultimateMovieArray.release_date;
+    year = year.substring(0, 4);
+    // console.log(genre);
+
+    gIDs = ultimateMovieArray.genre_ids;
+
+    let ultimateGID = "";
+    gIDs.forEach((gid) => {
+      for (let i = 0; i < genre.length; i++) {
+        if (genre[i].genreID === gid) {
+          ultimateGID = ultimateGID + ` ${genre[i].genreName}`;
+        }
+      }
+    });
+
+    // Call AJAX call function to get ultimate movie videos array
+    let className = '';
+    console.log(ultimateMovieArray.id, trailerKey,);
+    if (trailerKey === "NA") {
+      className = "noTrailer";
+    } else {
+      className = "showTrailer"; // address in css
     }
-  });
 
-  // Call AJAX call function to get ultimate movie videos array
-  let className ='';
-  console.log(ultimateMovie.id, trailerKey, );
-  if (trailerKey === "NA") {
-    className = "noTrailer";
-  } else {
-    className = "showTrailer";
-  }
-
-  // let youtubesearchURL = ;
-
-  const htmlString = `
+    const htmlString = `
           <div>
             <figure class="moviePoster">
-                <img src="https://image.tmdb.org/t/p/w500/${ultimateMovie.backdrop_path}" alt="Movie ${ultimateMovie.title}"
+                <img src="https://image.tmdb.org/t/p/w500/${ultimateMovieArray[i].backdrop_path}" alt="Movie ${ultimateMovieArray[i].title}"
             </figure>
             <div>
-                <h3 class="movieTitle"> ${ultimateMovie.title} <span class="year">${year}</span></h3>
-                <p class="releaseDate">${ultimateMovie.release_date}</p>
+                <h3 class="movieTitle"> ${ultimateMovieArray[i].title} <span class="year">${year}</span></h3>
+                <p class="releaseDate">${ultimateMovieArray[i].release_date}</p>
                 <p class="genre">${ultimateGID}</p>
                 <div>
-                    <p class="userScore">${ultimateMovie.vote_average}</p>
+                    <p class="userScore">${ultimateMovieArray[i].vote_average}</p>
                     <p class="playTrailer">
                         <a href="https://www.youtube.com/watch?v=${trailerKey}" class="${className}">Play Trailer</a>
                     </p>
                 </div>
                 <h4 class="overview">Overview</h4>
-                <p class="synoposis">${ultimateMovie.overview}</p>
-                <p class="director">${director}</p>
+                <p class="synoposis">${ultimateMovieArray[i].overview}</p>
+                <p class="director">${ultimateDirector}</p>
                 <p>Director</p>
             </div> 
           </div>
+`;
 
-
-          <div>
-            <figure class="moviePoster">
-                <img src="https://image.tmdb.org/t/p/w500/${ultimateMovie.backdrop_path}" alt="Movie ${ultimateMovie.title}"
-            </figure>
-            <div>
-                <h3 class="movieTitle"> ${ultimateMovie.title} <span class="year">${year}</span></h3>
-                <p class="releaseDate">${ultimateMovie.release_date}</p>
-                <p class="genre">${ultimateGID}</p>
-                <div>
-                    <p class="userScore">${ultimateMovie.vote_average}</p>
-                    <p class="playTrailer">
-                        <a href="https://www.youtube.com/watch?v=${trailerKey}" class="${className}">Play Trailer</a>
-                    </p>
-                </div>
-                <h4 class="overview">Overview</h4>
-                <p class="synoposis">${ultimateMovie.overview}</p>
-                <p class="director">${director}</p>
-                <p>Director</p>
-            </div> 
-          </div>`;
-
-    console.log(htmlString);    
+    console.log(htmlString);
     $(".carousel").append(htmlString);
+  }
+  
   $('.carousel').slick({
 
   });
@@ -373,53 +388,25 @@ flixmix.eventListner = () => {
 
 // Get a random movie from the list of movies in the finalDirectors Array
 
-flixmix.getARandomMovie = (directorsArray, youtubeKeyArray) => {
+// flixmix.getARandomMovie = (directorsArray, youtubeKeyArray) => {
 
-    console.log(`inside getRandm function`)
-  const index = Math.floor(Math.random() * directorsArray.length);
-//   console.log(`directors array....`, directorsArray[1].directors);
-  const ultimateMovieID = directorsArray[index].movieID;
-//   console.log(`ultimate`, ultimateMovieID);
-  const ultimateMovieDeets = flixmix.returnedMovies.filter((movie) => {
-    console.log(movie.id);
-    return movie.id === ultimateMovieID;
-  });
+//     console.log(`inside getRandm function`)
+//   const index = Math.floor(Math.random() * directorsArray.length);
+// //   console.log(`directors array....`, directorsArray[1].directors);
+//   const ultimateMovieID = directorsArray[index].movieID;
+// //   console.log(`ultimate`, ultimateMovieID);
+//   const ultimateMovieDeets = flixmix.returnedMovies.filter((movie) => {
+//     console.log(movie.id);
+//     return movie.id === ultimateMovieID;
+//   });
 
 //   console.log(` moviedeets`, ultimateMovieDeets);
 
- let trailerKey = "";
-//  console.log(`length of youtubekey array is`, flixmix.youtubeKey);
-
-console.log(`youtubekey array length ${youtubeKeyArray.length}`);
- youtubeKeyArray.forEach((movie) => {
-   console.log(`movie ID is ${movie.movieID}`);
-   if (movie.movieID === ultimateMovieID) {
-     trailerKey = movie.TrailerKey;
-   }
- });
-
-// let ultimateDirectorsArray =[];
-let ultimatedirector ='';
- directorsArray.forEach((movie) => {
-        console.log(`movie id and ultimate movie`, movie.movieID, ultimateMovieID );
-     if(movie.movieID === ultimateMovieID ){
-         console.log(movie.directors);
-         movie.directors.forEach((director)=> {
-
-             console.log(director);
-             console.log(`before ${ultimatedirector}`);
-            //  const d = director;
-            ultimatedirector = ultimatedirector + "   " + director;
-            console.log(`after ${ultimatedirector}`);
-         });
-       
-     }
-
- });
+ 
 // console.log(ultimatedirector);
 
-  flixmix.displayUltimateMovie(ultimateMovieDeets[0], trailerKey, ultimatedirector);
-};
+  // flixmix.displayUltimateMovie(, trailerKey, ultimatedirector);
+
 
 
 
