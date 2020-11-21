@@ -308,8 +308,8 @@ let year = release_date;
 };
 // Function to display the ultimate movie on screen
 flixmix.displayMovies = (ultimateMovieArray, directorsArray, youtubeKeyArray) => {
-    // $('.carousel').empty();
-   $(".carousel").html('');
+    $('.carousel').empty();
+  $('.carousel').removeClass('slick-initialized slick-slider');
   
   console.log(ultimateMovieArray);
   for (let i=0; i < ultimateMovieArray.length; i++) {
@@ -342,7 +342,7 @@ flixmix.displayMovies = (ultimateMovieArray, directorsArray, youtubeKeyArray) =>
                 <div>
                     <p class="userScore">${ultimateMovieArray[i].vote_average}</p>
                     <p class="playTrailer">
-                        <a href="https://www.youtube.com/watch?v=${trailerKey}" class="${className}">Play Trailer</a>
+                        <a href="https://www.youtube.com/watch?v=${trailerKey}" class="${className}" target="__blank">Play Trailer</a>
                     </p>
                 </div>
                 <h4 class="overview">Overview</h4>

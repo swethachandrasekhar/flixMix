@@ -235,46 +235,88 @@ html {
   overflow: hidden;
 }
 
+body {
+  background-image: url("../assets/1c11de_5757768.jpg");
+  background-blend-mode: overlay;
+  background-color: white;
+}
+
+main {
+  height: 80vh;
+}
+
 .title {
-  background-color: #c3423f;
+  background-color: #141414;
   text-align: center;
   padding: 25px 0 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 15vh;
+  margin: 0 auto;
+  margin-top: 60px;
   display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  border-bottom: 0.5px solid whitesmoke;
+  border-top: 0.5px solid whitesmoke;
 }
 
 .logo {
   font-family: "Dosis", sans-serif;
   font-size: 5rem;
   text-transform: uppercase;
+  position: absolute;
+  top: 90px;
+  color: #c3423f;
+  left: 20px;
   font-weight: 500;
   padding: 0 15px;
 }
 
 .logo span {
   font-weight: 800;
+  color: whitesmoke;
+}
+
+.about {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  padding-top: 40px;
+  font-size: 2.2rem;
+  text-align: center;
+}
+
+.about .you {
+  font-family: "Dosis", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.about .they {
+  font-family: "Dosis", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-style: italic;
 }
 
 .ultimateMovie {
   height: 50vh;
+  margin: 30px 0;
 }
 
 .moviePick {
   font-family: "Raleway", sans-serif;
-  color: #141414;
-  background-color: #E8E8E8;
+  color: whitesmoke;
+  background-color: #141414;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-blend-mode: overlay;
-  padding: 20px;
-  border: 3px solid blue;
+  padding: 40px;
 }
 
 .moviePoster {
@@ -297,6 +339,47 @@ html {
   text-align: center;
   padding: 20px;
   height: 10vh;
+}
+
+.search {
+  background-color: #141414;
+}
+
+form {
+  height: 15vh;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+form div {
+  padding: 0  10px;
+}
+
+.genre1, .genre2 {
+  border-radius: 5px;
+  padding: 3px;
+  border: 3px solid #c3423f;
+}
+
+.genreSubmit {
+  display: inline;
+  padding: 7px;
+  font-size: 1.8rem;
+  border: 3px solid #4ba7ec;
+  background-color: #141414;
+  color: #4ba7ec;
+  font-weight: lighter;
+  text-transform: uppercase;
 }
 
 body {
@@ -334,4 +417,29 @@ img {
   width: 90%;
   max-width: 1000px;
   margin: 0 auto;
+  margin-top: 30px;
+}
+
+.slide-arrow{
+  position: absolute;
+  top: 50%;
+  margin-top: -15px;
+}
+.prev-arrow{
+  left: -40px;
+  width: 0;
+  height: 0;
+  border-left: 0 solid transparent;
+  border-right: 15px solid #113463;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+.next-arrow{
+  right: -40px;
+  width: 0;
+  height: 0;
+  border-right: 0 solid transparent;
+  border-left: 15px solid #113463;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
 }

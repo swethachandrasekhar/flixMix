@@ -21,7 +21,7 @@
   height: 20px;
   width: 20px;
   line-height: 0px;
-  font-size: 0px;
+  font-size: 0;
   cursor: pointer;
   background: transparent;
   color: transparent;
@@ -31,8 +31,12 @@
   padding: 0;
   border: none;
   outline: none;
+ 
 }
 
+.slick-prev {
+  margin-right: 10px;
+}
 .slick-prev:hover, .slick-prev:focus,
 .slick-next:hover,
 .slick-next:focus {
@@ -55,7 +59,7 @@
 .slick-prev:before,
 .slick-next:before {
   font-family: "slick";
-  font-size: 20px;
+  font-size: 60px;
   line-height: 1;
   color: white;
   opacity: 0.75;

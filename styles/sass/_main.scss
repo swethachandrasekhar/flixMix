@@ -1,55 +1,80 @@
 
+body {
+
+   background-image: url('../assets/1c11de_5757768.jpg');
+   background-blend-mode: overlay;
+   background-color: white;
+}
+
+main {
+    height: 80vh;
+}
+
 .title {
-    background-color: $accent;
+    background-color: $background;
     text-align: center;
     padding: 25px 0 5px;
     display: flex;
-    height: 15vh;
+    margin: 0 auto;
+    margin-top: 60px;
     display: flex;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: flex-start;
+    border-bottom: 0.5px solid $text;
+     border-top: 0.5px solid $text;
 }
 
 .logo {
     font-family: $secondaryFont;
     font-size: 5rem;
     text-transform: uppercase;
+    position: absolute;
+    top: 90px;
+    color: $accent;
+    left: 20px;
     font-weight: 500;
     padding: 0 15px;
         & span {
             font-weight: 800;
+            color: $text;  
+
         }
 }
 
-// .about {
-//     font-family: $primaryFont;
-//     font-weight: 400;
-//         & .you {
-//             font-family: $secondaryFont;
-//             font-weight: 800;
-//             text-transform: uppercase;
-//         }
-//         & .they {
-//             font-family: $secondaryFont;
-//             font-weight: 600;
-//             text-transform: uppercase;
-//             font-style: italic;
-//         }
-// }
+.about {
+    font-family: $primaryFont;
+    font-weight: 400;
+    padding-top: 40px;
+    font-size: 2.2rem;
+    text-align: center;
+        & .you {
+            font-family: $secondaryFont;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        & .they {
+            font-family: $secondaryFont;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+}
 
 .ultimateMovie {
     height: 50vh;
+    margin: 30px 0;
 }
 
 .moviePick {
     font-family: $primaryFont;
-    color: $background;
-    background-color: 		#E8E8E8;
+    color: $text;
+    background-color: $background;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-blend-mode: overlay;
-    padding: 20px;
-    border: 3px solid blue;
+    padding: 40px;
+   
 }
 
 // .moviePick::before {
@@ -82,4 +107,48 @@
     text-align: center;
     padding: 20px;
     height: 10vh;
+}
+
+
+// SEARCH SECTION STYLING 
+
+.search {
+// border: 2px white solid;
+background-color: $background;
+
+}
+
+form {
+    height: 15vh;
+    
+    font-size: 2.2rem;   
+    text-transform: uppercase;
+    font-family: $primaryFont ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+     div {
+         padding: 0  10px;
+     }
+   
+}
+
+.genre1, .genre2 {
+    border-radius: 5px;
+    padding: 3px;
+     border: 3px solid $accent;
+
+    
+}
+
+.genreSubmit {
+    // margin-top: ;
+    display: inline;
+    padding: 7px;
+    font-size: 1.8rem;
+    border: 3px solid #4ba7ec;
+    background-color: $background;
+    color: #4ba7ec;
+    font-weight: lighter;
+    text-transform: uppercase;
 }

@@ -13,38 +13,18 @@
     <title>FlixMix</title>
 </head>
 <body>
-    <header class="wrapper title">
+    <header class="title">
         <h1 class="logo"><span>Flix</span>Mix</h1>
-        <!-- <h2 class="about"><span class="you">You</span> wanna watch action and <span class="they">they</span> wanna watch drama...why not watch both?</h2> -->
-    </header>
-    <main class="wrapper">
-        <section>
-            <form>
-                <label for="genre1">Choose a genre:</label>
-                <select name="genre1" id="genre1" class="genre1">
-                    <option value="">Please choose</option>
-                    <option value="28">Action</option>
-                    <option value="12">Adventure</option>     
-                    <option value="16">Animation</option>
-                    <option value="35">Comedy</option>
-                    <option value="99">Documentary</option>
-                    <option value="18">Drama</option>
-                    <option value="10751">Family</option>
-                    <option value="14">Fantasy</option>
-                    <option value="36">History</option>
-                    <option value="27">Horror</option>
-                    <option value="10402">Music</option>
-                    <option value="9648">Mystery</option>
-                    <option value="10749">Romance</option>
-                    <option value="878">Science Fiction</option>
-                    <option value="10770">TV Movie</option>
-                    <option value="53">Thriller</option>
-                    <option value="10752">War</option>
-                    <option value="37">Western</option>
-                </select>
-                <label for="genre2">Choose a genre:</label>
-                    <select name="genre2" id="genre2" class="genre2">
-                        <option value="">Please choose</option>
+        <section id="search" class="search">
+            <!-- <h2 class="about "><span class="you">You</span> wanna watch action and <span class="they"> they</span> wanna
+                watch
+                drama...why not watch both?</h2> -->
+            <form class="">
+                <div>
+                    <!-- <label for="genre1"> want </label> -->
+                    <label for="genre1" class="about "><span class="you">You</span> wanna watch</label>
+                    <select name="genre1" id="genre1" class="genre1">
+                        <!-- <option value="">Please choose</option> -->
                         <option value="28">Action</option>
                         <option value="12">Adventure</option>
                         <option value="16">Animation</option>
@@ -63,12 +43,48 @@
                         <option value="53">Thriller</option>
                         <option value="10752">War</option>
                         <option value="37">Western</option>
+        
+        
+        
                     </select>
-                <button class="genreSubmit">Submit</button>
+                </div>
+                <div>
+                    <!-- <label for="genre2">They want </label> -->
+                   <label for="genre2" class="about ">and <span class="they"> they</span> wanna
+                    watch
+                    </label>
+                    <select name="genre2" id="genre2" class="genre2">
+                        <!-- <option value="">Please choose</option> -->
+                        <option value="18">Drama</option>
+                        <option value="28">Action</option>
+                        <option value="12">Adventure</option>
+                        <option value="16">Animation</option>
+                        <option value="35">Comedy</option>
+                        <option value="99">Documentary</option>
+                        <option value="10751">Family</option>
+                        <option value="14">Fantasy</option>
+                        <option value="36">History</option>
+                        <option value="27">Horror</option>
+                        <option value="10402">Music</option>
+                        <option value="9648">Mystery</option>
+                        <option value="10749">Romance</option>
+                        <option value="878">Science Fiction</option>
+                        <option value="10770">TV Movie</option>
+                        <option value="53">Thriller</option>
+                        <option value="10752">War</option>
+                        <option value="37">Western</option>
+                    </select>
+                </div>
+                <button class="genreSubmit">Find a movie</button>
             </form>
         </section>
+    
+    </header>
+    <main class=>
+        
+        
 
-        <section class="ultimateMovie">
+        <section class="wrapper ultimateMovie">
                 <div class="carousel">
                     
                 </div>
@@ -77,7 +93,7 @@
             </div> -->
         <!-- </section> -->
     </main>
-    <footer class="wrapper createdAt">
+    <footer class="createdAt">
         <p>Created by Swetha & Jonathan at <a href="https://junocollege.com">Juno College</a></p>
     </footer>
 
