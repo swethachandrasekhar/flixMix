@@ -8,13 +8,24 @@
     <link rel="stylesheet" type="text/css" href="./slick/slick.css">
     <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
     <title>FlixMix</title>
+    <style>
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        body {
+            background-color: burlywood;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>FlixMix</h1>
         <h2>Please choose 1 or 2 types of movie genres to curate a random movie recommendation that combines the 2 genres</h2>
     </header>
-    <main>
+    <main class="wrapper">
         <section>
             <form>
                 <label for="genre1">Choose a genre:</label>
@@ -66,7 +77,7 @@
         </section>
 
         <section>
-            <div class="ultimateMovie" style="max-width: 600px">
+            <div class="ultimateMovie">
                 <div class="carousel">
                     <!-- <figure class="moviePoster">
                     

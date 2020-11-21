@@ -213,7 +213,7 @@ flixmix.filteredMoviesTrailer = (array) => {
     console.log(
       `director length and youtube key length ${flixmix.finalDirectorList.length} ${flixmix.youtubeKey.length}`
     );
-   flixmix.displayUltimateMovie(array, flixmix.finalDirectorList, flixmix.youtubeKey);
+   flixmix.displayMovies(array, flixmix.finalDirectorList, flixmix.youtubeKey);
  });
 
 }
@@ -251,62 +251,78 @@ flixmix.movieTrailer = (trailerRes) => {
  
 }
 
+
+//Function to get ultimate-Director to display on sscreen
+flixmix.getUltimateDirector = (movieID, directorsArray) => {
+let ultimateDirector = "";
+
+ directorsArray.forEach((movie) => {
+   if (movie.movieID === movieID) {
+     movie.directors.forEach((director) => {
+       ultimateDirector = ultimateDirector + "   " + director;
+     });
+   }
+ });
+
+ return ultimateDirector;
+};
+
+
+//function to get ultimate trailer key
+flixmix.getUltimateTrailerKey = (movieID, youtubeKeyArray) => {
+ let trailerKey = "";
+  youtubeKeyArray.forEach((movie) => {
+    if (movie.movieID === movieID) {
+      trailerKey = movie.TrailerKey;
+    }
+  });
+ console.log(trailerKey);
+
+ return trailerKey;
+
+}
+
+
+//Function to get genre
+flixmix.getUltimateGenre = (gIDs) => {
+ let ultimateGID = '';
+
+  gIDs.forEach((gid) => {
+  for (let i = 0; i < genre.length; i++) {
+    if (genre[i].genreID === gid) {
+      ultimateGID = ultimateGID + ` ${genre[i].genreName}`;
+    }
+  }
+});
+  return ultimateGID;
+};
+
+
+//Function to the get the ultimate Release "YEAR"
+
+flixmix.getUltimateReleaseYear = (release_date) => {
+let year = release_date;
+ year = year.substring(0, 4);
+
+ return year;
+};
 // Function to display the ultimate movie on screen
-flixmix.displayUltimateMovie = (ultimateMovieArray, directorsArray, youtubeKeyArray) => {
-  console.log(ultimateMovieArray.length);
+flixmix.displayMovies = (ultimateMovieArray, directorsArray, youtubeKeyArray) => {
+   $(".carousel").html('');
+  
+  console.log(ultimateMovieArray);
   for (let i=0; i < ultimateMovieArray.length; i++) {
-    let trailerKey = "";
-    //  console.log(`length of youtubekey array is`, flixmix.youtubeKey);
 
-    // console.log(`youtubekey array length ${youtubeKeyArray.length}`);
-    youtubeKeyArray.forEach((movie) => {
-      // console.log(`movie ID is ${movie.movieID}`);
-      if (movie.movieID === ultimateMovieArray[i].id) {
-        trailerKey = movie.TrailerKey;
-      }
-    });
-
+    let ultimateDirector = flixmix.getUltimateDirector(ultimateMovieArray[i].id, directorsArray);
+    let trailerKey = flixmix.getUltimateTrailerKey(ultimateMovieArray[i].id, youtubeKeyArray );
+    let ultimateGID = flixmix.getUltimateGenre(ultimateMovieArray[i].genre_ids);
+    let year = flixmix.getUltimateReleaseYear( ultimateMovieArray[i].release_date);
     
-
-    // let ultimateDirectorsArray =[];
-    let ultimateDirector = '';
-    directorsArray.forEach((movie) => {
-      // console.log(`movie id and ultimate movie`, movie.movieID, ultimateMovieID);
-      if (movie.movieID === ultimateMovieArray[i].id) {
-        // console.log(movie.directors);
-        movie.directors.forEach((director) => {
-
-          // console.log(director);
-          // console.log(`before ${ultimatedirector}`);
-          //  const d = director;
-          ultimateDirector = ultimateDirector + "   " + director;
-          // console.log(`after ${ultimatedirector}`);
-        });
-
-      }
-
-    });
-
-
-
-    let year = ultimateMovieArray.release_date;
-    year = year.substring(0, 4);
-    // console.log(genre);
-
-    gIDs = ultimateMovieArray.genre_ids;
-
-    let ultimateGID = "";
-    gIDs.forEach((gid) => {
-      for (let i = 0; i < genre.length; i++) {
-        if (genre[i].genreID === gid) {
-          ultimateGID = ultimateGID + ` ${genre[i].genreName}`;
-        }
-      }
-    });
+    console.log(ultimateGID, ultimateDirector, trailerKey, year);
 
     // Call AJAX call function to get ultimate movie videos array
     let className = '';
-    console.log(ultimateMovieArray.id, trailerKey,);
+    // console.log(ultimateMovieArray.id, trailerKey,);
     if (trailerKey === "NA") {
       className = "noTrailer";
     } else {
@@ -334,7 +350,7 @@ flixmix.displayUltimateMovie = (ultimateMovieArray, directorsArray, youtubeKeyAr
                 <p>Director</p>
             </div> 
           </div>
-`;
+          `;
 
     console.log(htmlString);
     $(".carousel").append(htmlString);
