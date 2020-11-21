@@ -290,7 +290,7 @@ flixmix.getUltimateGenre = (gIDs) => {
   gIDs.forEach((gid) => {
   for (let i = 0; i < genre.length; i++) {
     if (genre[i].genreID === gid) {
-      ultimateGID = ultimateGID + ` ${genre[i].genreName}`;
+      ultimateGID = ultimateGID + ` &nbsp &nbsp${genre[i].genreName}`;
     }
   }
 });
@@ -336,19 +336,22 @@ flixmix.displayMovies = (ultimateMovieArray, directorsArray, youtubeKeyArray) =>
                 <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/${ultimateMovieArray[i].backdrop_path}" alt="Movie ${ultimateMovieArray[i].title}">
             </figure>
             <div class="info">
-                <h3 class="movieTitle"> ${ultimateMovieArray[i].title} <span class="year">${year}</span></h3>
-                <p class="releaseDate">${ultimateMovieArray[i].release_date}</p>
-                <p class="genre">${ultimateGID}</p>
-                <div>
-                    <p class="userScore">${ultimateMovieArray[i].vote_average}</p>
+                <h3 class="movieTitle"> ${ultimateMovieArray[i].title} <span class="year">(${year})</span></h3>
+                <div class="releaseGenre">
+                  <p class="releaseDate">${ultimateMovieArray[i].release_date}</p>
+                  <span>|</span>
+                  <p class="genre">${ultimateGID}</p>
+                </div>
+                <div class="scoreTrailer">
+                    <p class="userScore"><span class="userScoreText">User score:</span> ${ultimateMovieArray[i].vote_average}</p>
                     <p class="playTrailer">
-                        <a href="https://www.youtube.com/watch?v=${trailerKey}" class="${className}" target="__blank">Play Trailer</a>
+                        <a href="https://www.youtube.com/watch?v=${trailerKey}" class="${className}" target="__blank"><i class="fab fa-youtube"></i> Play Trailer</a>
                     </p>
                 </div>
                 <h4 class="overview">Overview</h4>
-                <p class="synoposis">${ultimateMovieArray[i].overview}</p>
+                <p class="synopsis">${ultimateMovieArray[i].overview}</p>
                 <p class="director">${ultimateDirector}</p>
-                <p>Director</p>
+                <p class="directorHeading">Director</p>
             </div> 
           </div>
           `;

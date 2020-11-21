@@ -241,10 +241,6 @@ body {
   background-color: black;
 }
 
-main {
-  min-height: 90vh;
-}
-
 .title {
   background-color: #141414;
   text-align: center;
@@ -317,7 +313,14 @@ main {
   background-repeat: no-repeat;
   background-position: center;
   background-blend-mode: overlay;
-  padding: 40px;
+  padding: 30px;
+  font-size: 1.8rem;
+}
+
+.movieTitle,
+.releaseGenre,
+.scoreTrailer {
+  margin-bottom: 10px;
 }
 
 .moviePoster {
@@ -325,12 +328,61 @@ main {
   max-width: 35%;
 }
 
+.movieTitle {
+  font-size: 4rem;
+}
+
+.year {
+  font-weight: 400;
+  color: darkgray;
+}
+
+.releaseGenre {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-weight: 800;
+}
+
+.releaseDate {
+  margin-right: 10px;
+}
+
+.genre {
+  margin-left: 10px;
+}
+
+.scoreTrailer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.userScore {
+  margin-right: 20px;
+  text-transform: uppercase;
+}
+
+.userScoreText {
+  font-size: 1.8rem;
+}
+
+.playTrailer i {
+  color: #c3423f;
+}
+
+.playTrailer a {
+  color: whitesmoke;
+}
+
 .info {
   display: inline-block;
   max-width: 65%;
-  padding-left: 10px;
+  margin-left: 20px;
   vertical-align: top;
-  padding-top: 10%;
+  padding-top: 20px;
 }
 
 .createdAt {
@@ -339,6 +391,10 @@ main {
   text-transform: uppercase;
   text-align: center;
   padding: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .search {
