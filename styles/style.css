@@ -238,11 +238,11 @@ html {
 body {
   background-image: url("../assets/1c11de_5757768.jpg");
   background-blend-mode: overlay;
-  background-color: white;
+  background-color: black;
 }
 
 main {
-  height: 80vh;
+  min-height: 90vh;
 }
 
 .title {
@@ -263,6 +263,7 @@ main {
           align-items: flex-start;
   border-bottom: 0.5px solid whitesmoke;
   border-top: 0.5px solid whitesmoke;
+  width: 100vw;
 }
 
 .logo {
@@ -270,7 +271,7 @@ main {
   font-size: 5rem;
   text-transform: uppercase;
   position: absolute;
-  top: 90px;
+  top: 70px;
   color: #c3423f;
   left: 20px;
   font-weight: 500;
@@ -297,6 +298,7 @@ main {
 }
 
 .about .they {
+  padding-right: 6px;
   font-family: "Dosis", sans-serif;
   font-weight: 600;
   text-transform: uppercase;
@@ -304,7 +306,6 @@ main {
 }
 
 .ultimateMovie {
-  height: 50vh;
   margin: 30px 0;
 }
 
@@ -338,31 +339,30 @@ main {
   text-transform: uppercase;
   text-align: center;
   padding: 20px;
-  height: 10vh;
 }
 
 .search {
   background-color: #141414;
+  padding: 20px 0 50px 0;
 }
 
 form {
-  height: 15vh;
   font-size: 2.2rem;
   text-transform: uppercase;
   font-family: "Raleway", sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
 form div {
-  padding: 0  10px;
+  padding: 0 15px;
 }
 
 .genre1, .genre2 {
@@ -380,6 +380,42 @@ form div {
   color: #4ba7ec;
   font-weight: lighter;
   text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+  .genre1, .genre2 {
+    text-align: center;
+  }
+  .genreContainerOne {
+    -ms-flex-preferred-size: 45%;
+        flex-basis: 45%;
+  }
+  .genreContainerTwo {
+    -ms-flex-preferred-size: 50%;
+        flex-basis: 50%;
+  }
+}
+
+@media (max-width: 800px) {
+  form {
+    margin: 20px 0 15px 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  form div {
+    margin-bottom: 15px;
+  }
+  .about {
+    min-width: 100%;
+    display: inline-block;
+    margin: 10px 0;
+    padding: 0;
+  }
+  .search {
+    padding: 0;
+  }
 }
 
 body {
@@ -414,32 +450,8 @@ img {
 }
 
 .wrapper {
-  width: 90%;
-  max-width: 1000px;
+  width: 95%;
+  max-width: 1200px;
   margin: 0 auto;
   margin-top: 30px;
-}
-
-.slide-arrow{
-  position: absolute;
-  top: 50%;
-  margin-top: -15px;
-}
-.prev-arrow{
-  left: -40px;
-  width: 0;
-  height: 0;
-  border-left: 0 solid transparent;
-  border-right: 15px solid #113463;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-}
-.next-arrow{
-  right: -40px;
-  width: 0;
-  height: 0;
-  border-right: 0 solid transparent;
-  border-left: 15px solid #113463;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
 }
