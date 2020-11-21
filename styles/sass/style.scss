@@ -3,9 +3,11 @@
 @import 'typography';
 @import 'main';
 
+// https://coolors.co/c3423f-141414-f5f5f5-228cdb 
 
 body {
     background-color: $background;
+    color: $text;
 }
 
 html {
@@ -23,6 +25,7 @@ body {
 h1, 
 h2,
 h3,
+figure,
 button {
     margin: 0;
     padding: 0;
@@ -31,11 +34,16 @@ button {
     text-decoration: none;
 }
 
+img {
+    width: 100%;
+}
+
 // Wrapper to center and constrain content
 .wrapper {
-    width: 90%;
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
+    margin-top: 30px;
 }
 
 
