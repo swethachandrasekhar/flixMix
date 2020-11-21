@@ -1,0 +1,35 @@
+
+.title {
+    text-align: center;
+    padding: 25px 0;
+}
+
+.logo {
+    font-family: $secondaryFont;
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+        & span {
+            font-weight: 800;
+        }
+}
+
+.about {
+    font-family: $primaryFont;
+    
+}
+
+
+.carousel {
+    font-family: $primaryFont;
+
+}
+
+
+.createdAt {
+    background-color: $accent;
+    font-family: $secondaryFont;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 20px;
+}

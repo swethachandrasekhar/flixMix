@@ -6,6 +6,7 @@
 
 body {
     background-color: $background;
+    color: $text;
 }
 
 html {
@@ -34,7 +35,7 @@ button {
 // Wrapper to center and constrain content
 .wrapper {
     width: 90%;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
