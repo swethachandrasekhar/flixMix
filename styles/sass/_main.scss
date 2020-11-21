@@ -1,7 +1,12 @@
 
 .title {
+    background-color: $accent;
     text-align: center;
-    padding: 25px 0;
+    padding: 25px 0 5px;
+    display: flex;
+    height: 15vh;
+    display: flex;
+    align-items: flex-end;
 }
 
 .logo {
@@ -9,21 +14,65 @@
     font-size: 5rem;
     text-transform: uppercase;
     font-weight: 500;
+    padding: 0 15px;
         & span {
             font-weight: 800;
         }
 }
 
-.about {
+// .about {
+//     font-family: $primaryFont;
+//     font-weight: 400;
+//         & .you {
+//             font-family: $secondaryFont;
+//             font-weight: 800;
+//             text-transform: uppercase;
+//         }
+//         & .they {
+//             font-family: $secondaryFont;
+//             font-weight: 600;
+//             text-transform: uppercase;
+//             font-style: italic;
+//         }
+// }
+
+.ultimateMovie {
+    height: 50vh;
+}
+
+.moviePick {
     font-family: $primaryFont;
-    
+    color: $background;
+    background-color: 		#E8E8E8;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-blend-mode: overlay;
+    padding: 20px;
+    border: 3px solid blue;
+}
+
+// .moviePick::before {
+//     content: 'dfgsdfgsdfg';
+//     background-blend-mode: overlay;
+//     opacity: 0.5;
+//     position: absolute;
+// }
+
+.moviePoster {
+    display: inline-block;
+    max-width: 35%;
+}
+
+.info {
+    display: inline-block;
+    max-width: 65%;
+    padding-left:10px;
+    vertical-align: top;
+    padding-top: 10%;
 }
 
 
-.carousel {
-    font-family: $primaryFont;
-
-}
 
 
 .createdAt {
@@ -32,4 +81,5 @@
     text-transform: uppercase;
     text-align: center;
     padding: 20px;
+    height: 10vh;
 }

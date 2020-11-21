@@ -112,7 +112,7 @@ flixmix.getMoviesAPICall = (genre1, genre2) => {
             api_key: flixmix.apiKey,
             with_genres: `${genre1},${genre2}`,
             language: "en-US",
-            page: 1
+            page: 2
             // check for more options
         }
     })
@@ -130,7 +130,7 @@ flixmix.getTrailerAPICall = (ID) => {
         data: {
             api_key: flixmix.apiKey,
             language: "en-US",
-            page: 1,
+            page: 2
         }
     })
 }
@@ -145,7 +145,7 @@ flixmix.getCreditsAPICall = (movieID) => {
     data: {
       api_key: flixmix.apiKey,
       language: "en-US",
-      page: 1,
+      page: 2 
     },
   });
 };
@@ -308,6 +308,7 @@ let year = release_date;
 };
 // Function to display the ultimate movie on screen
 flixmix.displayMovies = (ultimateMovieArray, directorsArray, youtubeKeyArray) => {
+    // $('.carousel').empty();
    $(".carousel").html('');
   
   console.log(ultimateMovieArray);
@@ -330,11 +331,11 @@ flixmix.displayMovies = (ultimateMovieArray, directorsArray, youtubeKeyArray) =>
     }
 
     const htmlString = `
-          <div>
+          <div class="moviePick" style="background-image: url('https://image.tmdb.org/t/p/w500/${ultimateMovieArray[i].backdrop_path}')">
             <figure class="moviePoster">
-                <img src="https://image.tmdb.org/t/p/w500/${ultimateMovieArray[i].backdrop_path}" alt="Movie ${ultimateMovieArray[i].title}"
+                <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/${ultimateMovieArray[i].backdrop_path}" alt="Movie ${ultimateMovieArray[i].title}">
             </figure>
-            <div>
+            <div class="info">
                 <h3 class="movieTitle"> ${ultimateMovieArray[i].title} <span class="year">${year}</span></h3>
                 <p class="releaseDate">${ultimateMovieArray[i].release_date}</p>
                 <p class="genre">${ultimateGID}</p>
@@ -353,14 +354,14 @@ flixmix.displayMovies = (ultimateMovieArray, directorsArray, youtubeKeyArray) =>
           `;
 
     console.log(htmlString);
+  
     $(".carousel").append(htmlString);
   }
+  $('.carousel').slick({});
   
-  $('.carousel').slick({
-
-  });
     
 };
+
 
 
 
@@ -388,8 +389,9 @@ flixmix.eventListner = () => {
         flixmix.selectedGenre2 = $(".genre2").find(":selected").val();
         // console.log(flixmix.selectedGenre1);
         // console.log(flixmix.selectedGenre2);
-
         flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
+   
+
     });
     
     // $(".nextMovie").on("click", (e) => {
