@@ -95,6 +95,7 @@ const flixmix = {};
 // assign url and apiKEY to variables
 flixmix.url = "https://api.themoviedb.org/3";
 flixmix.apiKey = "43cf4349cdbabac82573b86e2df23c8e";
+// flixmix.apiKey = "43cf4349cdbabac82573b86e2df23c8";
 flixmix.selectedGenre1 = "";
 flixmix.selectedGenre2 = "";
 flixmix.returnedMovies = [];
@@ -175,20 +176,22 @@ flixmix.filteredMoviesDirectors = (array) => {
     trailers.push(flixmix.getTrailerAPICall(movies.id));
   });
   $.when(...directors)
-     .then(function (...gotDirectors) {
-
-            gotDirectors.forEach((item) => {
-            const crew = item[0].crew;
-            const movieID = item[0].id;
+    .then(function (...gotDirectors) {
+      gotDirectors.forEach((item) => {
+        const crew = item[0].crew;
+        const movieID = item[0].id;
         // Function call to create an array of crew and movie
-            flixmix.storeDirectors(crew, movieID);
-            });
+        flixmix.storeDirectors(crew, movieID);
+      });
 
-            flixmix.filteredMoviesTrailer(array); 
-       
+      flixmix.filteredMoviesTrailer(array);
+
       //ASK ON HELPCUE
       // <----- WAS RETURNING 0 OUTSIDE OF THIS FUNCTION
       // console.log(flixmix.youtubeKey);
+    })
+    .fail((err) => {
+      flixmix.failureMessage();
     });
    
 
@@ -204,17 +207,23 @@ flixmix.filteredMoviesTrailer = (array) => {
     });
 
  $.when(...trailers)
- .then(function (...gotTrailers) {
-   console.log(`gotTrailer`, gotTrailers);
-   gotTrailers.forEach((trailer) => {
-     flixmix.movieTrailer(trailer[0]);
-
-    });
-    console.log(
-      `director length and youtube key length ${flixmix.finalDirectorList.length} ${flixmix.youtubeKey.length}`
-    );
-   flixmix.displayMovies(array, flixmix.finalDirectorList, flixmix.youtubeKey);
- });
+   .then(function (...gotTrailers) {
+     console.log(`gotTrailer`, gotTrailers);
+     gotTrailers.forEach((trailer) => {
+       flixmix.movieTrailer(trailer[0]);
+     });
+     console.log(
+       `director length and youtube key length ${flixmix.finalDirectorList.length} ${flixmix.youtubeKey.length}`
+     );
+     flixmix.displayMovies(
+       array,
+       flixmix.finalDirectorList,
+       flixmix.youtubeKey
+     );
+   })
+   .fail((err) => {
+     flixmix.failureMessage();
+   });
 
 }
 
@@ -369,35 +378,54 @@ flixmix.displayMovies = (ultimateMovieArray, directorsArray, youtubeKeyArray) =>
 };
 
 
+//Create a function to handle API errors and display useful information to the user
+ flixmix.failureMessage = () => {
+ $(".carousel").empty();
+ $(".carousel").removeClass("slick-initialized slick-slider");
+
+let errorHtml = ` <div class="displayFailure">
+
+                        <p>Something went wrong. Please try again later!</p>
+                    </div>`;   
+
+  $(".carousel").append(errorHtml);   
+
+ }; 
 
 
 // store the results from the API call into an array
-flixmix.getMovies = (selectedGenre1, selectedGenre2) => {
-    $.when(flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2))
-        .then(function (res) {
-            console.log(res.results);
-            flixmix.returnedMovies = res.results;
-            flixmix.filteredMoviesDirectors(flixmix.returnedMovies);
-            // flixmix.filteredMoviesTrailer(flixmix.returnedMovies);
-        }
-    );
+flixmix.getGenres = (selectedGenre1, selectedGenre2) => {
+  $.when(flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2))
+    .then(function (res) {
+      console.log(res.results);
+      flixmix.returnedMovies = res.results;
+      flixmix.filteredMoviesDirectors(flixmix.returnedMovies);
+      // flixmix.filteredMoviesTrailer(flixmix.returnedMovies);
+    })
+    .fail((err) => {
+      flixmix.failureMessage();
+    });
 };
+
+//On user Clicking Find Movies, make a get Genre API call
+flixmix.findMovies = () => {
+ flixmix.finalDirectorList.length = 0;
+ flixmix.youtubeKey.length = 0;
+ flixmix.selectedGenre1 = "";
+ flixmix.selectedGenre2 = "";
+ $('.landingPageMessage').addClass('hide');
+ flixmix.selectedGenre1 = $(".genre1").find(":selected").val();
+ flixmix.selectedGenre2 = $(".genre2").find(":selected").val();
+ flixmix.getGenres(flixmix.selectedGenre1, flixmix.selectedGenre2);
+};
+
 
 // Event listener for the submit button when genres are selected
 flixmix.eventListner = () => {
     $("form").on("submit", (e) => {
         e.preventDefault();
-        flixmix.finalDirectorList.length = 0;
-        flixmix.youtubeKey.length = 0;
-         flixmix.selectedGenre1 = ''; 
-          flixmix.selectedGenre2 = '';
-        flixmix.selectedGenre1 = $(".genre1").find(":selected").val();
-        flixmix.selectedGenre2 = $(".genre2").find(":selected").val();
-        // console.log(flixmix.selectedGenre1);
-        // console.log(flixmix.selectedGenre2);
-        flixmix.getMovies(flixmix.selectedGenre1, flixmix.selectedGenre2);
-   
-
+        flixmix.findMovies();
+       
     });
     
     // $(".nextMovie").on("click", (e) => {

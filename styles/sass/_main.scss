@@ -34,7 +34,7 @@ body {
     position: absolute;
     top: 10px;
     color: $accent;
-    left: 15%;
+    left: 2%;
     font-weight: 500;
     padding: 0 15px;
         & span {
@@ -172,15 +172,25 @@ body {
 
 
 .createdAt {
-    background-color: $accent;
-    font-family: $secondaryFont;
+    background-color: $background;
+    font-family: $primaryFont;
     text-transform: uppercase;
     text-align: center;
-    padding: 20px;
+    font-size: 1.6rem;
+    padding: 12px;
+    color: $footer ;
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
+    display: flex;
+    justify-content: space-around;
+
+    & a {
+        color: $footer;
+    }
+
+    
 }
 
 
@@ -192,6 +202,18 @@ background-color: $background;
 padding: 20px 0 50px 0;
 
 }
+
+.landingPageMessage {
+    text-align: center;
+    font-family: $primaryFont;
+    font-weight: 200;
+    font-size: 1.5rem;
+
+}
+.landingPageMessage.hide {
+    display: none;
+}
+
 
 form {
     
@@ -208,6 +230,7 @@ form {
 
 .genre1, .genre2 {
     border-radius: 5px;
+    cursor: pointer;
      padding: 3px;
      border: 3px solid $accent;
      position: relative;
@@ -217,14 +240,36 @@ form {
         
 }
 
-.genre1::before {
-            content: "asdfasdf";
-            position: absolute;
-            min-width: 15px;
-            min-height: 15px;
-            background-color: red;
-            color: yellow;
-            // right: -15px;
+.selectContainerOne, .selectContainerTwo {
+    position: relative;
+}
+
+.selectContainerOne::after{
+        content: "⌄";
+        position: absolute;
+        min-width: 25px;
+        height: 30px;
+        min-height: 10px;
+        background-color: white;
+        color: red;
+        z-index: 999;
+        right: 24px;
+        top: 4px;
+        pointer-events: none;
+        }
+
+.selectContainerTwo::after {
+        content: "⌄";
+        position: absolute;
+        min-width: 25px;
+        height: 30px;
+        min-height: 10px;
+        background-color: white;
+        color: red;
+        z-index: 999;
+        right: 31px;
+        top: 4px;
+        pointer-events: none;
         }
 
 .genreSubmit {
@@ -235,15 +280,30 @@ form {
     border: 3px solid $button;
     background-color: $background;
     color: $button;
+    cursor: pointer;
     font-weight: lighter;
     text-transform: uppercase;
-        &:hover,
-        &:focus {
-            background-color: $buttonOpaque;
-            color: $text;
-        }
+       
 }
 
+
+.displayFailure {
+    width: calc(100vw / 2);
+    height: calc(100vw / 3);
+    background-color: $background;
+    color: $text;
+    font-size: 2.5rem;
+    font-family: $primaryFont;
+    margin: 0 auto;
+    padding: 10px;
+    & p {
+        vertical-align: middle;
+        transform: translateY(100%);
+       text-align: center;
+    }
+    
+
+}
 
 @media(max-width: 1100px){
     .genre1, .genre2 {
@@ -331,3 +391,19 @@ form {
     }
 }
 
+@media (hover: hover) {
+ 
+    .createdAt {
+        a:hover {
+        color: $text;
+        }
+    }
+
+    .genreSubmit:hover,
+    .genreSubmit:focus {
+          background-color: $buttonOpaque;
+            color: $text;
+        
+    }
+
+}
