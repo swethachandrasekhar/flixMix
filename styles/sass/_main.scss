@@ -210,26 +210,42 @@ form {
     border-radius: 5px;
      padding: 3px;
      border: 3px solid $accent;
-
-    
+     position: relative;
+        &:focus {
+            border: 3px solid $button;
+        }
+        
 }
+
+.genre1::before {
+            content: "asdfasdf";
+            position: absolute;
+            min-width: 15px;
+            min-height: 15px;
+            background-color: red;
+            color: yellow;
+            // right: -15px;
+        }
 
 .genreSubmit {
     // margin-top: ;
     display: inline;
     padding: 7px;
     font-size: 1.8rem;
-    border: 3px solid #4ba7ec;
+    border: 3px solid $button;
     background-color: $background;
-    color: #4ba7ec;
+    color: $button;
     font-weight: lighter;
     text-transform: uppercase;
+        &:hover,
+        &:focus {
+            background-color: $buttonOpaque;
+            color: $text;
+        }
 }
 
 
 @media(max-width: 1100px){
-    
-
     .genre1, .genre2 {
         text-align: center;
     }
@@ -251,7 +267,13 @@ form {
     }
 
     .info {
-        margin: 0;
+        max-width: 100%;
+    }
+
+
+
+    .userScore {
+        margin-bottom: 10px;
     }
 
     .moviePick{
@@ -298,6 +320,14 @@ form {
 
     .search {
         padding: 0;
+    }
+
+    .releaseDate,
+    .genre,
+    .userScore {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 
