@@ -24,6 +24,7 @@ body {
     border-bottom: 0.5px solid $text;
     border-top: 0.5px solid $text;
     width: 100%;
+    position: relative;
 }
 
 .logo {
@@ -31,9 +32,9 @@ body {
     font-size: 5rem;
     text-transform: uppercase;
     position: absolute;
-    top: 70px;
+    top: 10px;
     color: $accent;
-    left: 20px;
+    left: 15%;
     font-weight: 500;
     padding: 0 15px;
         & span {
@@ -66,7 +67,9 @@ body {
 
 .ultimateMovie {
     margin: 30px 0;
-    min-height: 575px;
+    // min-height: 600px;
+    height: 300px;
+    // height: calc(100vh - 322px);
 }
 
 .moviePick {
@@ -79,6 +82,7 @@ body {
     background-blend-mode: overlay;
     padding: 30px;
     font-size: 1.8rem;
+    display: flex;
 }
 
 .movieTitle,
@@ -90,6 +94,17 @@ body {
 .moviePoster {
     display: inline-block;
     max-width: 35%;
+    // & img {
+        //     object-fit: cover;
+        // }
+    }
+    
+.info {
+    display: inline-block;
+    max-width: 65%;
+    margin-left: 20px;
+    vertical-align: top;
+    padding-top: 20px;
 }
 
 .movieTitle {
@@ -103,6 +118,7 @@ body {
 
 .releaseGenre {
     display: flex;
+    flex-wrap: wrap;
     font-weight: 800;
 }
 
@@ -114,10 +130,16 @@ body {
     margin-left: 10px;
 }
 
-.scoreTrailer {
+.scoreTrailer,
+.overview {
     display: flex;
-    font-size: 3rem;
+    flex-wrap: wrap;
+    font-size: 2.6rem;
     font-weight: 800;
+}
+
+.overview {
+    margin-bottom: 5px;
 }
 
 .userScore {
@@ -138,15 +160,15 @@ body {
     }
 }
 
-.info {
-    display: inline-block;
-    max-width: 65%;
-    margin-left: 20px;
-    vertical-align: top;
-    padding-top: 20px;
+.synopsis {
+    margin-bottom: 30px;
 }
 
 
+.director {
+    font-weight: 800;
+    margin-bottom: 5px;
+}
 
 
 .createdAt {
@@ -155,6 +177,10 @@ body {
     text-transform: uppercase;
     text-align: center;
     padding: 20px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 
@@ -214,7 +240,44 @@ form {
     .genreContainerTwo {
         flex-basis: 50%;
     }
+
+    // .ultimateMovie {
+    //     min-height: 400px;
+    // }
+
+    .carousel {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    .info {
+        margin: 0;
+    }
+
+    .moviePick{
+        text-align: center;
+    
+    }
+
+    .overview {
+        justify-content: center;
+    }
+
+    .synopsis {
+        text-align: left;
+    }
+
+    .releaseGenre,
+    .scoreTrailer {
+        justify-content: center;
+    }
+
+    .pipe {
+        display: none;
+    }
+
 }
+ 
 
 @media (max-width: 800px) {
 
