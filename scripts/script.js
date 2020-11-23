@@ -215,9 +215,9 @@ flixmix.movieTrailer = (trailerRes) => {
   flixmix.youtubeKey.push({ movieID: trailerMovieID, TrailerKey: trailerKey });
 };
 
-// function to get director of displayed movie to show on sscreen
+// function to get director of displayed movie to show on screen
 flixmix.getUltimateDirector = (movieID, directorsArray) => {
-  ultimateDirector = "";
+  let ultimateDirector = "";
   directorsArray.forEach((movie) => {
     if (movie.movieID === movieID) {
       movie.directors.forEach((director) => {
