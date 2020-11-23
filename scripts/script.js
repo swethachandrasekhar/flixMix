@@ -322,7 +322,6 @@ flixmix.failureMessage = () => {
 flixmix.getGenres = (selectedGenre1, selectedGenre2) => {
   $.when(flixmix.getMoviesAPICall(selectedGenre1, selectedGenre2))
     .then(function (res) {
-      console.log(res.results);
       flixmix.returnedMovies = res.results;
       flixmix.filteredMoviesDirectors(flixmix.returnedMovies);
     })
