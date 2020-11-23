@@ -3,57 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importing FONT awesome icons  -->
     <script src="https://kit.fontawesome.com/b6cafcd3e2.js" crossorigin="anonymous"></script>
+    <!-- Importing google fonts  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;600;700;800&family=Raleway:wght@400;600;800&display=swap"
     rel="stylesheet">
+    <!-- Importing Slick jquery plugin  -->
     <link rel="stylesheet" type="text/css" href="./slick/slick.css">
     <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+    <!-- linking external style sheet  -->
     <link rel="stylesheet" href="./styles/style.css">
-    <title>FlixMix</title>
+    <title>FlixMix - Find Movies!</title>
 </head>
 <body>
+    <!-- Start header section -->
     <header class="title">
+        <!-- Logo of the App  -->
         <h1 class="logo"><span>Flix</span>Mix</h1>
-        <section id="search" class="search wrapper">
-            <!-- <h2 class="about "><span class="you">You</span> wanna watch action and <span class="they"> they</span> wanna
-                watch
-                drama...why not watch both?</h2> -->
-            <form >
+        <!-- Start of Search section  -->
+        <section id="search" class="search wrapper">           
+            
+            <form>
+                <!-- DropDown Container One  -->
                 <div class="genreContainerOne">
-                    <!-- <label for="genre1"> want </label> -->
+           
                     <label for="genre1" class="about "><span class="you">You</span> wanna watch</label>
-                    <!-- <div class="selectContainerOne"> -->
-                        <select name="genre1" id="genre1" class="genre1">
-                            <!-- <option value="">Please choose</option> -->
-                            <option value="28">Action</option>
-                            <option value="12">Adventure</option>
-                            <option value="16">Animation</option>
-                            <option value="35">Comedy</option>
-                            <option value="99">Documentary</option>
-                            <option value="18">Drama</option>
-                            <option value="10751">Family</option>
-                            <option value="14">Fantasy</option>
-                            <option value="36">History</option>
-                            <option value="27">Horror</option>
-                            <option value="10402">Music</option>
-                            <option value="9648">Mystery</option>
-                            <option value="10749">Romance</option>
-                            <option value="878">Science Fiction</option>
-                            <option value="10770">TV Movie</option>
-                            <option value="53">Thriller</option>
-                            <option value="10752">War</option>
-                            <option value="37">Western</option>
-                        </select>
-                    <!-- </div>     -->
+                   
+                    <select name="genre1" id="genre1" class="genre1">                 
+                        <option value="28">Action</option>
+                        <option value="12">Adventure</option>
+                        <option value="16">Animation</option>
+                        <option value="35">Comedy</option>
+                        <option value="99">Documentary</option>
+                        <option value="18">Drama</option>
+                        <option value="10751">Family</option>
+                        <option value="14">Fantasy</option>
+                        <option value="36">History</option>
+                        <option value="27">Horror</option>
+                        <option value="10402">Music</option>
+                        <option value="9648">Mystery</option>
+                        <option value="10749">Romance</option>
+                        <option value="878">Science Fiction</option>
+                        <option value="10770">TV Movie</option>
+                        <option value="53">Thriller</option>
+                        <option value="10752">War</option>
+                        <option value="37">Western</option>
+                    </select>
+                    
                 </div>
+                <!-- DropDown Container Two  -->
                 <div class="genreContainerTwo">
-                    <!-- <label for="genre2">They want </label> -->
-                   <label for="genre2" class="about "><span class="they">they </span> wanna watch
-                    </label>
-                    <!-- <div class="selectContainerTwo"> -->
+                   
+                    <label for="genre2" class="about "><span class="they">they </span> wanna watch</label>
+                   
                     <select name="genre2" id="genre2" class="genre2">
-                        <!-- <option value="">Please choose</option> -->
+                        <option value="">Choose Genre</option>
                         <option value="18">Drama</option>
                         <option value="28">Action</option>
                         <option value="12">Adventure</option>
@@ -73,42 +78,58 @@
                         <option value="10752">War</option>
                         <option value="37">Western</option>
                     </select>
-                    <!-- </div> -->
+                
                 </div>
-                <button class="genreSubmit">Find a movie</button>
-                <!-- <p>Watch both!</p> -->
-            </form>
-        </section>
-    
-    </header>
-    <main>
-        
-        
-        
-        <section class="wrapper ultimateMovie">
-                <div class="landingPageMessage">
-                    
-                    <h2>Find what to watch next when you can't agree on what to watch next! 
-                    </h2>
 
-                </div>
-                <div class="carousel">
-                   <!-- <p></p> -->
-                </div>
-            <!-- <div>
-                <button class="nextMovie">Next Movie</button>
-            </div> -->
-        <!-- </section> -->
+                <button class="genreSubmit">Find a movie</button>
+                
+            </form>
+        <!-- End of Search Section  -->
+        </section>
+        
+    <!-- End of Header -->
+    </header>
+    
+    <!-- Start of Main section  -->
+    <main>
+        <!-- Section to Display Movie results   -->
+        <section class="wrapper ultimateMovie">
+            
+            <!-- landing Page Message -->
+            <div class="landingPageMessage">
+                    
+                <h2>Find what to watch next when you can't agree on what to watch next! </h2>
+
+            </div>
+
+            <!-- Display results container  -->
+            <div class="carousel">
+                  <!-- Added to the DOM by Jquery  -->
+            </div>
+  
+    <!-- End of main section              -->
     </main>
+
+    <!-- Start of Footer section  -->
     <footer class="createdAt">
+
         <p>Created by Swetha & Jonathan at <a href="https://junocollege.com">Juno College</a></p>
+        
         <p>API by <a href="https://www.themoviedb.org/"> MovieDB</a></p>
+
+    <!-- End of Footer Section  -->
     </footer>
 
+    <!-- Importing JQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
+    <!-- Importing SLICK for Carousel Display  -->
     <script type="text/javascript" src="./slick/slick.min.js"></script>
+
+    <!-- Linking external script file  -->
     <script src="./scripts/script.js"></script>
+
+
 </body>
 </html>
 
