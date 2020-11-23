@@ -621,6 +621,10 @@ form div {
     background-color: #2c92df87;
     color: whitesmoke;
   }
+  .playTrailer:hover i,
+  .playTrailer:focus i {
+    color: whitesmoke;
+  }
 }
 
 body {

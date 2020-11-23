@@ -384,4 +384,12 @@ form {
     background-color: $buttonOpaque;
     color: $text;
   }
+
+.playTrailer:hover,
+.playTrailer:focus {
+  & i {
+   color: $text
+  }
+
+}
 }
