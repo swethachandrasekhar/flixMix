@@ -385,19 +385,27 @@ body {
 
 .userScore {
   margin-right: 20px;
-  text-transform: uppercase;
 }
 
 .userScoreText {
   font-size: 1.8rem;
 }
 
+.directorHeading {
+  padding-bottom: 40px;
+}
+
 .playTrailer i {
   color: #e14642;
+  font-size: 3rem;
+  -webkit-transform: translateY(10%);
+          transform: translateY(10%);
 }
 
 .playTrailer a {
   color: whitesmoke;
+  font-size: 1.8rem;
+  padding-bottom: 20px;
 }
 
 .synopsis {

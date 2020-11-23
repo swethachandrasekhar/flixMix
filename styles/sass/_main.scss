@@ -1,3 +1,4 @@
+// INDEX PAGE STYLING 
 
 body {
 
@@ -6,11 +7,7 @@ body {
    background-color: black;
 }
 
-// main {
-//     min-height: 90vh;
-
-// }
-
+// HEADER STYLING 
 .title {
     background-color: $background;
     text-align: center;
@@ -65,11 +62,11 @@ body {
         }
 }
 
+// MOVIES DISPLAY STYLING 
+
 .ultimateMovie {
     margin: 30px 0;
-    // min-height: 600px;
     height: 300px;
-    // height: calc(100vh - 322px);
 }
 
 .moviePick {
@@ -144,19 +141,27 @@ body {
 
 .userScore {
     margin-right: 20px;
-    text-transform: uppercase;
 }
 
 .userScoreText {
     font-size: 1.8rem;
+
 }
 
+.directorHeading {
+    padding-bottom: 40px;
+}
 .playTrailer {
+    
     & i {
         color: $accent;
+        font-size: 3rem;
+        transform: translateY(10%);
     }
     & a {
         color: $text;
+        font-size: 1.8rem;
+        padding-bottom: 20px;
     }
 }
 
