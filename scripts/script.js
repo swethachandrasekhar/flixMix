@@ -163,7 +163,7 @@ flixmix.filteredMoviesDirectors = (array) => {
       flixmix.filteredMoviesTrailer(array);
     })
     // display error message to user if AJAX call unsuccessful
-    .fail((err) => {
+    .fail( () => {
       flixmix.failureMessage();
     });
 };
@@ -187,7 +187,7 @@ flixmix.filteredMoviesTrailer = (array) => {
       );
     })
     // display error message to user if AJAX call unsuccessful
-    .fail((err) => {
+    .fail(() => {
       flixmix.failureMessage();
     });
 };
@@ -326,7 +326,7 @@ flixmix.getGenres = (selectedGenre1, selectedGenre2) => {
       flixmix.filteredMoviesDirectors(flixmix.returnedMovies);
     })
     // display error message to user if AJAX call unsuccessful
-    .fail((err) => {
+    .fail(() => {
       flixmix.failureMessage();
     });
 };
