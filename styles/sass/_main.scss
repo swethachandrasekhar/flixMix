@@ -1,414 +1,387 @@
-// INDEX PAGE STYLING 
+// INDEX PAGE STYLING
 
 body {
-
-   background-image: url('../assets/1c11de_5757768.jpg');
-   background-blend-mode: overlay;
-   background-color: black;
+  background-image: url("../assets/1c11de_5757768.jpg");
+  background-blend-mode: overlay;
+  background-color: black;
 }
 
-// HEADER STYLING 
+// HEADER STYLING
 .title {
-    background-color: $background;
-    text-align: center;
-    padding: 25px 0 5px;
-    display: flex;
-    margin: 0 auto;
-    margin-top: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    border-bottom: 0.5px solid $text;
-    border-top: 0.5px solid $text;
-    width: 100%;
-    position: relative;
+  background-color: $background;
+  text-align: center;
+  padding: 25px 0 5px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border-bottom: 0.5px solid $text;
+  border-top: 0.5px solid $text;
+  width: 100%;
+  position: relative;
 }
 
 .logo {
-    font-family: $secondaryFont;
-    font-size: 5rem;
-    text-transform: uppercase;
-    position: absolute;
-    top: 10px;
-    color: $accent;
-    left: 2%;
-    font-weight: 500;
-    padding: 0 15px;
-        & span {
-            font-weight: 800;
-            color: $text;  
-
-        }
+  font-family: $secondaryFont;
+  font-size: 5rem;
+  text-transform: uppercase;
+  position: absolute;
+  top: 10px;
+  color: $accent;
+  left: 2%;
+  font-weight: 500;
+  padding: 0 15px;
+  & span {
+    font-weight: 800;
+    color: $text;
+  }
 }
 
 .about {
-    font-family: $primaryFont;
-    font-weight: 400;
-    padding-top: 40px;
-    font-size: 2.2rem;
-    text-align: center;
-        & .you {
-            font-family: $secondaryFont;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-        & .they {
-            padding-right: 6px;
-            // display: inline;
-            font-family: $secondaryFont;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-style: italic;
-        }
+  font-family: $primaryFont;
+  font-weight: 400;
+  padding-top: 40px;
+  font-size: 2.2rem;
+  text-align: center;
+  & .you {
+    font-family: $secondaryFont;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  & .they {
+    padding-right: 6px;
+
+    font-family: $secondaryFont;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-style: italic;
+  }
 }
 
-// MOVIES DISPLAY STYLING 
+// SEARCH SECTION STYLING
+
+.search {
+  background-color: $background;
+  padding: 20px 0 50px 0;
+}
+
+// LANDING PAGES STYLING
+
+.landingPageMessage {
+  text-align: center;
+  font-family: $primaryFont;
+  font-weight: 200;
+  font-size: 1.5rem;
+}
+.landingPageMessage.hide {
+  display: none;
+}
+
+// MOVIES DISPLAY STYLING
 
 .ultimateMovie {
-    margin: 30px 0;
-    height: 300px;
+  margin: 30px 0;
+  height: 300px;
 }
 
 .moviePick {
-    font-family: $primaryFont;
-    color: $text;
-    background-color: $background;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-blend-mode: overlay;
-    padding: 30px;
-    font-size: 1.8rem;
-    display: flex;
+  font-family: $primaryFont;
+  color: $text;
+  background-color: $background;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: overlay;
+  padding: 30px;
+  font-size: 1.8rem;
+  display: flex;
 }
 
 .movieTitle,
 .releaseGenre,
 .scoreTrailer {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .moviePoster {
-    display: inline-block;
-    max-width: 35%;
-    // & img {
-        //     object-fit: cover;
-        // }
-    }
-    
+  display: inline-block;
+  max-width: 35%;
+}
+
 .info {
-    display: inline-block;
-    max-width: 65%;
-    margin-left: 20px;
-    vertical-align: top;
-    padding-top: 20px;
+  display: inline-block;
+  max-width: 65%;
+  margin-left: 20px;
+  vertical-align: top;
+  padding-top: 20px;
 }
 
 .movieTitle {
-    font-size: 4rem;
+  font-size: 4rem;
 }
 
 .year {
-    font-weight: 400;
-    color: darkgray;
+  font-weight: 400;
+  color: darkgray;
 }
 
 .releaseGenre {
-    display: flex;
-    flex-wrap: wrap;
-    font-weight: 800;
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: 800;
 }
 
 .releaseDate {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .genre {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .scoreTrailer,
 .overview {
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 2.6rem;
-    font-weight: 800;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 2.6rem;
+  font-weight: 800;
 }
 
 .overview {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .userScore {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .userScoreText {
-    font-size: 1.8rem;
-
+  font-size: 1.8rem;
 }
 
 .directorHeading {
-    padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 .playTrailer {
-    
-    & i {
-        color: $accent;
-        font-size: 3rem;
-        transform: translateY(10%);
-    }
-    & a {
-        color: $text;
-        font-size: 1.8rem;
-        padding-bottom: 20px;
-    }
+  & i {
+    color: $accent;
+    font-size: 3rem;
+    transform: translateY(10%);
+  }
+  & a {
+    color: $text;
+    font-size: 1.8rem;
+    padding-bottom: 20px;
+  }
 }
 
 .synopsis {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
-
 
 .director {
-    font-weight: 800;
-    margin-bottom: 5px;
+  font-weight: 800;
+  margin-bottom: 5px;
 }
 
+// FOOTER STYLING
 
 .createdAt {
-    background-color: $background;
-    font-family: $primaryFont;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 1.6rem;
-    padding: 12px;
-    color: $footer ;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-around;
+  background-color: $background;
+  font-family: $primaryFont;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.6rem;
+  padding: 12px;
+  color: $footer;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
 
-    & a {
-        color: $footer;
-    }
-
-    
+  & a {
+    color: $footer;
+  }
 }
-
-
-// SEARCH SECTION STYLING 
-
-.search {
-// border: 2px white solid;
-background-color: $background;
-padding: 20px 0 50px 0;
-
-}
-
-.landingPageMessage {
-    text-align: center;
-    font-family: $primaryFont;
-    font-weight: 200;
-    font-size: 1.5rem;
-
-}
-.landingPageMessage.hide {
-    display: none;
-}
-
 
 form {
-    
-    font-size: 2.2rem;   
-    text-transform: uppercase;
-    font-family: $primaryFont ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-     div {
-         padding: 0 15px;
-     }
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  font-family: $primaryFont;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    padding: 0 15px;
+  }
 }
 
-.genre1, .genre2 {
-    border-radius: 5px;
-    cursor: pointer;
-     padding: 3px;
-     border: 3px solid $accent;
-     position: relative;
-        &:focus {
-            border: 3px solid $button;
-        }
-        
+.genre1,
+.genre2 {
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 3px;
+  border: 3px solid $accent;
+  position: relative;
+  &:focus {
+    border: 3px solid $button;
+  }
 }
 
-.selectContainerOne, .selectContainerTwo {
-    position: relative;
+.selectContainerOne,
+.selectContainerTwo {
+  position: relative;
 }
 
-.selectContainerOne::after{
-        content: "⌄";
-        position: absolute;
-        min-width: 25px;
-        height: 30px;
-        min-height: 10px;
-        background-color: white;
-        color: red;
-        z-index: 999;
-        right: 24px;
-        top: 4px;
-        pointer-events: none;
-        }
+.selectContainerOne::after {
+  content: "⌄";
+  position: absolute;
+  min-width: 25px;
+  height: 30px;
+  min-height: 10px;
+  background-color: white;
+  color: red;
+  z-index: 999;
+  right: 24px;
+  top: 4px;
+  pointer-events: none;
+}
 
 .selectContainerTwo::after {
-        content: "⌄";
-        position: absolute;
-        min-width: 25px;
-        height: 30px;
-        min-height: 10px;
-        background-color: white;
-        color: red;
-        z-index: 999;
-        right: 31px;
-        top: 4px;
-        pointer-events: none;
-        }
+  content: "⌄";
+  position: absolute;
+  min-width: 25px;
+  height: 30px;
+  min-height: 10px;
+  background-color: white;
+  color: red;
+  z-index: 999;
+  right: 31px;
+  top: 4px;
+  pointer-events: none;
+}
 
 .genreSubmit {
-    // margin-top: ;
-    display: inline;
-    padding: 7px;
-    font-size: 1.8rem;
-    border: 3px solid $button;
-    background-color: $background;
-    color: $button;
-    cursor: pointer;
-    font-weight: lighter;
-    text-transform: uppercase;
-       
+  display: inline;
+  padding: 7px;
+  font-size: 1.8rem;
+  border: 3px solid $button;
+  background-color: $background;
+  color: $button;
+  cursor: pointer;
+  font-weight: lighter;
+  text-transform: uppercase;
 }
-
 
 .displayFailure {
-    width: calc(100vw / 2);
-    height: calc(100vw / 3);
-    background-color: $background;
-    color: $text;
-    font-size: 2.5rem;
-    font-family: $primaryFont;
+  width: calc(100vw / 2);
+  height: calc(100vw / 3);
+  background-color: $background;
+  color: $text;
+  font-size: 2.5rem;
+  font-family: $primaryFont;
+  margin: 0 auto;
+  padding: 10px;
+  & p {
+    vertical-align: middle;
+    transform: translateY(100%);
+    text-align: center;
+  }
+}
+
+// START OF MEDIA QUERIES
+
+@media (max-width: 1100px) {
+  .genre1,
+  .genre2 {
+    text-align: center;
+  }
+
+  .genreContainerOne {
+    flex-basis: 45%;
+  }
+  .genreContainerTwo {
+    flex-basis: 50%;
+  }
+
+  .carousel {
+    width: 85%;
     margin: 0 auto;
-    padding: 10px;
-    & p {
-        vertical-align: middle;
-        transform: translateY(100%);
-       text-align: center;
-    }
-    
+  }
 
+  .info {
+    max-width: 100%;
+  }
+
+  .userScore {
+    margin-bottom: 10px;
+  }
+
+  .moviePick {
+    text-align: center;
+  }
+
+  .overview {
+    justify-content: center;
+  }
+
+  .synopsis {
+    text-align: left;
+  }
+
+  .releaseGenre,
+  .scoreTrailer {
+    justify-content: center;
+  }
+
+  .pipe {
+    display: none;
+  }
 }
-
-@media(max-width: 1100px){
-    .genre1, .genre2 {
-        text-align: center;
-    }
-
-     .genreContainerOne {
-        flex-basis: 45%;
-    }
-    .genreContainerTwo {
-        flex-basis: 50%;
-    }
-
-    // .ultimateMovie {
-    //     min-height: 400px;
-    // }
-
-    .carousel {
-        width: 85%;
-        margin: 0 auto;
-    }
-
-    .info {
-        max-width: 100%;
-    }
-
-
-
-    .userScore {
-        margin-bottom: 10px;
-    }
-
-    .moviePick{
-        text-align: center;
-    
-    }
-
-    .overview {
-        justify-content: center;
-    }
-
-    .synopsis {
-        text-align: left;
-    }
-
-    .releaseGenre,
-    .scoreTrailer {
-        justify-content: center;
-    }
-
-    .pipe {
-        display: none;
-    }
-
-}
- 
 
 @media (max-width: 800px) {
-
-    form {
-        margin: 20px 0 15px 0;
-        flex-direction: column;
-        div {
-            margin-bottom: 15px;
-        }
+  form {
+    margin: 20px 0 15px 0;
+    flex-direction: column;
+    div {
+      margin-bottom: 15px;
     }
+  }
 
-    .about {
-        min-width: 100%;
-        display: inline-block;
-        margin: 10px 0;
-        padding: 0;
-    }
+  .about {
+    min-width: 100%;
+    display: inline-block;
+    margin: 10px 0;
+    padding: 0;
+  }
 
-    .search {
-        padding: 0;
-    }
+  .search {
+    padding: 0;
+  }
 
-    .releaseDate,
-    .genre,
-    .userScore {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-    }
+  .releaseDate,
+  .genre,
+  .userScore {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 @media (hover: hover) {
- 
-    .createdAt {
-        a:hover {
-        color: $text;
-        }
+  .createdAt {
+    a:hover {
+      color: $text;
     }
+  }
 
-    .genreSubmit:hover,
-    .genreSubmit:focus {
-          background-color: $buttonOpaque;
-            color: $text;
-        
-    }
-
+  .genreSubmit:hover,
+  .genreSubmit:focus {
+    background-color: $buttonOpaque;
+    color: $text;
+  }
 }
