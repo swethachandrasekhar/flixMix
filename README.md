@@ -1,4 +1,4 @@
-#FlixMix
+# FlixMix
 
 HTML | Sass | Javascript | jQuery | Rest API | Pair-Programming
 
